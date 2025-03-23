@@ -38,7 +38,6 @@ public class SignupPageController {
     @FXML
     private TextField txtemail;
 
-
     private final UserBo userBo = new UserBoImpl();
 
     @FXML

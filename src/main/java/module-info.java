@@ -12,7 +12,7 @@ module lk.ijse {
     requires jbcrypt;
     requires org.hibernate.orm.core;
     requires java.naming;
-
+    requires java.mail;
 
 
     opens lk.ijse.controller to javafx.fxml;
