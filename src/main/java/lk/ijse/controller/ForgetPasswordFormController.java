@@ -6,6 +6,7 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -18,7 +19,7 @@ import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public class ForgetPasswordFormController {
+public class ForgetPasswordFormController  {
 
     @FXML
     private JFXButton btnSubmit;
