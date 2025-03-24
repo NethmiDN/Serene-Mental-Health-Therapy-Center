@@ -65,7 +65,7 @@
             <Image url="@../images/brain-removebg-preview.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblLogin" layoutX="329.0" layoutY="14.0" opacity="0.9" styleClass="txtWelcome" text="Welcome to the SERENE">
+      <Label fx:id="lblLogin" layoutX="329.0" layoutY="14.0" opacity="0.9" text="Welcome to the SERENE">
          <font>
             <Font name="System Bold" size="47.0" />
          </font>

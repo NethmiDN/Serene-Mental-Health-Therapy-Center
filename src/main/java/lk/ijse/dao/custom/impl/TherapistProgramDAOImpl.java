@@ -105,4 +105,9 @@ public class TherapistProgramDAOImpl implements TherapistProgramDAO {
             return "TP00-001"; // First user ID
         }
     }
+
+    @Override
+    public Therapist getById(String therapyProgramId) {
+        return null;
+    }
 }

@@ -10,16 +10,47 @@ import lk.ijse.entity.TherapyProgram;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TherapyProgramsBOImpl implements TherapyProgramsBO {
     TherapistDAO therapistDAO = new TherapistDAOImpl();
 
-    TherapistProgramDAO therapyProgramDAO = new TherapistProgramDAO();
+    TherapistProgramDAO therapyProgramDAO = new TherapistProgramDAO() {
+        @Override
+        public boolean save(TherapyProgram entity) {
+            return false;
+        }
+
+        @Override
+        public boolean update(TherapyProgram entity) {
+            return false;
+        }
+
+        @Override
+        public boolean deleteByPK(String id) throws Exception {
+            return false;
+        }
+
+        @Override
+        public List<TherapyProgram> getAll() {
+            return List.of();
+        }
+
+        @Override
+        public String getNextId() {
+            return "";
+        }
+
+        @Override
+        public Therapist getById(String therapyProgramId) {
+            return null;
+        }
+    };
+
     @Override
     public ArrayList<TherapyProgramDTO> loadAllTherapyPrograms() throws SQLException, ClassNotFoundException {
-
         ArrayList<TherapyProgramDTO> therapyProgramDTOS = new ArrayList<>();
-        ArrayList<TherapyProgram> therapyPrograms = (ArrayList<TherapyProgram>) therapyProgramDAO.getAll();
+        List<TherapyProgram> therapyPrograms = therapyProgramDAO.getAll();
 
         for (TherapyProgram therapyProgram : therapyPrograms) {
             therapyProgramDTOS.add(

@@ -133,7 +133,7 @@ public class TherapyProgramManagementFormController implements Initializable {
             }
             tblTherapyPrograms.setItems(therapyProgramTMSList);
         } catch (Exception e) {
-            showAlert("Error", "Failed to load therapists!", Alert.AlertType.ERROR);
+            showAlert("Error", "Failed to load therapy programs!", Alert.AlertType.ERROR);
             e.printStackTrace();
         }
 
@@ -146,7 +146,7 @@ public class TherapyProgramManagementFormController implements Initializable {
 
     @FXML
     void btnAddTherapistsOnAction(ActionEvent event) {
-
+        AdminPageController.getInstance().navigateToTherapistManagement();
     }
 
     @FXML
@@ -190,7 +190,7 @@ public class TherapyProgramManagementFormController implements Initializable {
 
     @FXML
     void navigateToHome(MouseEvent event) {
-
+        loadUI("/view/Home.fxml");
     }
 
     private void loadUI(String resource) {

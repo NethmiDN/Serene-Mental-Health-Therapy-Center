@@ -31,7 +31,7 @@ public class HomeController {
     }
 
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/loginForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
         primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/icon.png"))));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);

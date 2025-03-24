@@ -44,11 +44,12 @@ public class UserDAOImpl  implements UserDAO {
             transaction = session.beginTransaction();
             session.save(user);
             transaction.commit();
+            return true; // Return true if the transaction is successful
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
             e.printStackTrace();
+            return false; // Return false if an exception occurs
         }
-        return false;
     }
 
     @Override

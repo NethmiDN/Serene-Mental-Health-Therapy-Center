@@ -26,5 +26,10 @@ public class Therapist {
     @OneToMany(mappedBy = "therapist", cascade = CascadeType.ALL)
     private List<TherapyProgram> therapyPrograms;
 
-
+    public Therapist(String id, String name, String specialization, String availability) {
+        this.id = id;
+        this.name = name;
+        this.specialization = specialization;
+        this.availability = availability;
+    }
 }

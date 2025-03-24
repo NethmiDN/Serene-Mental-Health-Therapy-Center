@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #CBDCEB;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.DashBoardFormController">
+<AnchorPane fx:id="rootPane" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #CBDCEB;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AdminPageController">
    <children>
       <VBox layoutX="51.0" layoutY="35.0" prefHeight="700.0" prefWidth="250.0" style="-fx-background-radius: 30;">
          <children>
@@ -155,7 +155,7 @@
             </VBox>
          </children>
       </VBox>
-      <AnchorPane fx:id="mainContent" layoutX="313.0" layoutY="35.0" prefHeight="700.0" prefWidth="1016.0" style="-fx-background-radius: 18; -fx-background-color: #F3F3E0;">
+      <AnchorPane fx:id="mainContent" layoutX="313.0" layoutY="35.0" prefHeight="700.0" prefWidth="850.0" style="-fx-background-radius: 18; -fx-background-color: #F3F3E0;">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

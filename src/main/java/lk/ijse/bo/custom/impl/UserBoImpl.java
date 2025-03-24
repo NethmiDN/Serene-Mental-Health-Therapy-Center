@@ -17,7 +17,7 @@ public class UserBoImpl implements UserBo {
 
         String hashedPassword = PasswordEncryptionUtil.hashPassword(password);
         String newUserId = userDAO.getNextId(); // Generate new ID
-        User user = new User(newUserId, username, hashedPassword, role);
+        User user = new User(newUserId, username,email, hashedPassword, role);
         userDAO.save(user);
         return true;
     }

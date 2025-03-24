@@ -77,7 +77,7 @@ public class LoginPageController {
         } else if (role == Role.RECEPTIONIST) {
             loadUI("/view/ReceptionistDashboard.fxml");
         } else if (role == Role.THERAPIST) {
-            loadUI("/view/TherapistDashboard.fxml");
+            loadUI("/view/TherapistManagementForm.fxml");
         } else {
             showAlert("Error", "Unauthorized access!", Alert.AlertType.ERROR);
         }
