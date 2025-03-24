@@ -40,6 +40,8 @@ public class SignupPageController {
 
     private final UserBo userBo = new UserBoImpl();
 
+    private static final String EMAIL_PATTERN = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@gmail\\.com$";
+
     @FXML
     void btnSignUpOnAction(ActionEvent event) {
         String username = txtUsername.getText().trim();
@@ -53,6 +55,10 @@ public class SignupPageController {
             return;
         }
 
+        if (!isValidEmail(txtemail.getText())) {
+            showAlert("Error", "Please enter a valid email address!", Alert.AlertType.ERROR);
+            return;
+        }
         if (!password.equals(confirmPassword)) {
             showAlert("Error", "Passwords do not match!", Alert.AlertType.ERROR);
             return;
@@ -70,6 +76,10 @@ public class SignupPageController {
         } else {
             showAlert("Error", "Username already exists!", Alert.AlertType.ERROR);
         }
+    }
+
+    private boolean isValidEmail(String email) {
+        return email.matches(EMAIL_PATTERN);
     }
 
     @FXML
