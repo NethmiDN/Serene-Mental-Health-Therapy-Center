@@ -6,8 +6,8 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class TherapistDTO {
-    private String id;
-    private String name;
+    private String therapistID;
+    private String therapistName;
     private String specialization;
     private String availability;
 }

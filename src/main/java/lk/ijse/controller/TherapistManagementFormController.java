@@ -95,8 +95,8 @@ public class TherapistManagementFormController implements Initializable {
             for (TherapistDTO therapistDTO : therapists) {
 
                 TherapistTM therapistTM = new TherapistTM(
-                        therapistDTO.getId(),
-                        therapistDTO.getName(),
+                        therapistDTO.getTherapistID(),
+                        therapistDTO.getTherapistName(),
                         therapistDTO.getSpecialization(),
                         therapistDTO.getAvailability()
                 );
@@ -111,6 +111,7 @@ public class TherapistManagementFormController implements Initializable {
 
         //table ek reload wenn hdnn
     }
+
 
     @FXML
     void btnAddNew_OnAction(ActionEvent event) {

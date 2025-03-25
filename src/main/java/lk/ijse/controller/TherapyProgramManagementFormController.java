@@ -106,8 +106,8 @@ public class TherapyProgramManagementFormController implements Initializable {
             for (TherapyProgramDTO therapyProgramDTO : therapyProgramDTOS) {
 
                 TherapyProgramTM therapyProgramTM = new TherapyProgramTM(
-                        therapyProgramDTO.getId(),
-                        therapyProgramDTO.getName(),
+                        therapyProgramDTO.getProgramId(),
+                        therapyProgramDTO.getProgramName(),
                         therapyProgramDTO.getDuration(),
                         therapyProgramDTO.getFee()
                 );
@@ -116,10 +116,9 @@ public class TherapyProgramManagementFormController implements Initializable {
             }
             tblTherapyPrograms.setItems(therapyProgramTMSList);
         } catch (Exception e) {
-            showAlert("Error", "Failed to load therapy programs!", Alert.AlertType.ERROR);
+            showAlert("Error", "Failed to load therapists!", Alert.AlertType.ERROR);
             e.printStackTrace();
         }
-
     }
 
     @FXML

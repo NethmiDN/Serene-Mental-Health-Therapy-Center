@@ -3,7 +3,7 @@ package lk.ijse.dao.custom.impl;
 import lk.ijse.bo.exception.DuplicateException;
 import lk.ijse.bo.exception.NotFoundException;
 import lk.ijse.config.FactoryConfiguration;
-import lk.ijse.dao.custom.TherapistProgramDAO;
+import lk.ijse.dao.custom.TherapyProgramDAO;
 import lk.ijse.entity.Therapist;
 import lk.ijse.entity.TherapyProgram;
 import org.hibernate.Session;
@@ -13,7 +13,7 @@ import org.hibernate.query.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TherapistProgramDAOImpl implements TherapistProgramDAO {
+public class TherapyProgramDAOImpl implements TherapyProgramDAO {
     private final FactoryConfiguration factoryConfiguration = new FactoryConfiguration();
 
     @Override
@@ -104,10 +104,5 @@ public class TherapistProgramDAOImpl implements TherapistProgramDAO {
         } else {
             return "TP00-001"; // First user ID
         }
-    }
-
-    @Override
-    public Therapist getById(String therapyProgramId) {
-        return null;
     }
 }

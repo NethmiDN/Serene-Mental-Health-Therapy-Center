@@ -18,6 +18,12 @@
 
     <mapping class="lk.ijse.entity.User"/>
     <mapping class="lk.ijse.entity.Therapist"/>
+    <mapping class="lk.ijse.entity.TherapistProgram"/>
+    <mapping class="lk.ijse.entity.Invoice"/>
+    <mapping class="lk.ijse.entity.Payment"/>
+    <mapping class="lk.ijse.entity.Patient"/>
+    <mapping class="lk.ijse.entity.TherapistProgramID"/>
     <mapping class="lk.ijse.entity.TherapyProgram"/>
+    <mapping class="lk.ijse.entity.TherapySession"/>
   </session-factory>
 </hibernate-configuration>

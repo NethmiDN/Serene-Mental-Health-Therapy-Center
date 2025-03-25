@@ -2,9 +2,7 @@ package lk.ijse.entity;
 
 import jakarta.persistence.*;
 import lk.ijse.util.Role;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor

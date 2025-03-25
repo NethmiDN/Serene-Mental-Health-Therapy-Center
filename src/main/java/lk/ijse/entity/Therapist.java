@@ -25,7 +25,7 @@ public class Therapist {
     private String availability;
 
     @OneToMany(mappedBy = "therapist", cascade = CascadeType.ALL)
-    private List<TherapyProgram> therapistPrograms;
+    private List<TherapistProgram> therapistPrograms;
 
     @OneToMany(mappedBy = "therapist", cascade = CascadeType.ALL)
     private List<TherapySession> therapySessions;

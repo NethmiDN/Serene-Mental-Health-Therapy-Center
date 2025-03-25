@@ -16,7 +16,7 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.TherapyProgramManagementFormController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="27.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30px; -fx-arc-width: 30px;" width="803.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="27.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30px; -fx-arc-width: 30px;" width="803.0">
          <fill>
             <LinearGradient endX="0.048" endY="0.712">
                <stops>

@@ -69,7 +69,7 @@ public class AdminPageController implements Initializable {
 
     @FXML
     void btnAppointmentOnAction(ActionEvent event) {
-
+        loadUI("/view/TherapySessionManagementForm.fxml");
     }
 
     @FXML
@@ -79,7 +79,6 @@ public class AdminPageController implements Initializable {
 
     @FXML
     void btnPatientOnAction(ActionEvent event) {
-
     }
 
     @FXML
@@ -142,9 +141,5 @@ public class AdminPageController implements Initializable {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Failed to load page!").show();
         }
-    }
-
-    public void navigateToTherapistManagement() {
-        loadUI("/view/TherapistManagementForm.fxml");
     }
 }

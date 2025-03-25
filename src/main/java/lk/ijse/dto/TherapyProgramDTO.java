@@ -6,8 +6,8 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class TherapyProgramDTO {
-    private String id;
-    private String name;
+    private String programId;
+    private String programName;
     private int duration;
     private double fee;
 }

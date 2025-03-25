@@ -47,8 +47,8 @@ public class TherapistTableFormController implements Initializable {
             for (TherapistDTO therapistDTO : therapists) {
 
                 TherapistTM therapistTM = new TherapistTM(
-                        therapistDTO.getId(),
-                        therapistDTO.getName(),
+                        therapistDTO.getTherapistID(),
+                        therapistDTO.getTherapistName(),
                         therapistDTO.getSpecialization(),
                         therapistDTO.getAvailability()
                 );

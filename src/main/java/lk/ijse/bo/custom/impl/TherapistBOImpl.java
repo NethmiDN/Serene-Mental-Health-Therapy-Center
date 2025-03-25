@@ -21,17 +21,24 @@ public class TherapistBOImpl implements TherapistBO {
         for (Therapist therapist : therapists) {
             therapistDTOS.add(
                     new TherapistDTO
-                            (therapist.getId(), therapist.getName(), therapist.getSpecialization(), therapist.getAvailability()
+                            (therapist.getTherapistID(), therapist.getTherapistName(), therapist.getSpecialization(), therapist.getAvailability()
 
-                            ));
+            ));
         }
         return therapistDTOS;
     }
 
     @Override
+    public String getNaxtTherapistID() {
+        return therapistDAO.getNextId();
+    }
+
+    @Override
     public boolean saveTherapist(TherapistDTO therapistDTO) {
         return therapistDAO.save(
-                new Therapist(therapistDTO.getId(), therapistDTO.getName(), therapistDTO.getSpecialization(), therapistDTO.getAvailability(), null)
+                new Therapist(therapistDTO.getTherapistID(), therapistDTO.getTherapistName(),
+                        therapistDTO.getSpecialization(), therapistDTO.getAvailability(),
+                        new ArrayList<>(), new ArrayList<>())
         );
 
     }
@@ -39,7 +46,7 @@ public class TherapistBOImpl implements TherapistBO {
     @Override
     public boolean updateTherapist(TherapistDTO therapistDTO) {
         return therapistDAO.update(
-                new Therapist(therapistDTO.getId(), therapistDTO.getName(), therapistDTO.getSpecialization(), therapistDTO.getAvailability(), null)
+                new Therapist(therapistDTO.getTherapistID(), therapistDTO.getTherapistName(), therapistDTO.getSpecialization(), therapistDTO.getAvailability(), new ArrayList<>(), new ArrayList<>())
         );
     }
 
@@ -47,4 +54,8 @@ public class TherapistBOImpl implements TherapistBO {
     public boolean deleteTherapist(String therapistId) throws Exception {
         return therapistDAO.deleteByPK(therapistId);
     }
+
+
+
+
 }
