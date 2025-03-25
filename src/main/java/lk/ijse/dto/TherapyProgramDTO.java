@@ -10,5 +10,4 @@ public class TherapyProgramDTO {
     private String name;
     private int duration;
     private double fee;
-    private String therapistId; // Store therapist's ID instead of full entity reference
 }

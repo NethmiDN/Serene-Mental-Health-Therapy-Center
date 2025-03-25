@@ -22,7 +22,7 @@ public class TherapistProgramDAOImpl implements TherapistProgramDAO {
         Transaction tx = session.beginTransaction();
 
         try{
-            Therapist existsTherapist = session.get(Therapist.class, entity.getId());
+            Therapist existsTherapist = session.get(Therapist.class, entity.getProgramId());
             if (existsTherapist != null) {
                 throw new DuplicateException("Therapist id duplicated");
             }

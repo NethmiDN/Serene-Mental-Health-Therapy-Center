@@ -21,7 +21,7 @@ public class TherapistDAOImpl implements TherapistDAO {
         Transaction transaction = session.beginTransaction();
         try {
             //T00-001
-            Therapist existsTherapist = session.get(Therapist.class, therapist.getId());
+            Therapist existsTherapist = session.get(Therapist.class, therapist.getTherapistID());
             if (existsTherapist != null) {
                 throw new DuplicateException("Therapist id duplicated");
             }

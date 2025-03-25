@@ -7,10 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -24,6 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class TherapyProgramManagementFormController implements Initializable {
@@ -33,9 +31,6 @@ public class TherapyProgramManagementFormController implements Initializable {
 
     @FXML
     private JFXButton btnAddNewTherapist;
-
-    @FXML
-    private JFXButton btnAddTherapists;
 
     @FXML
     private JFXButton btnDelete;
@@ -59,9 +54,6 @@ public class TherapyProgramManagementFormController implements Initializable {
     private TableColumn<TherapyProgramTM, String> clmProgramName;
 
     @FXML
-    private TableColumn<TherapyProgramTM, String> clmTherapistsId;
-
-    @FXML
     private ImageView imgHome;
 
     @FXML
@@ -79,9 +71,6 @@ public class TherapyProgramManagementFormController implements Initializable {
     @FXML
     private TextField txtProgramName;
 
-    @FXML
-    private TextField txtTherapistId;
-
     private final TherapyProgramsBO therapyProgramsBO = new TherapyProgramsBOImpl();
     private static TherapyProgramManagementFormController instance;
 
@@ -94,17 +83,12 @@ public class TherapyProgramManagementFormController implements Initializable {
         return instance;
     }
 
-    public void setTherapistId(String id) {
-        txtTherapistId.setText(id);
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         clmProgramId.setCellValueFactory(new PropertyValueFactory<>("id"));
         clmProgramName.setCellValueFactory(new PropertyValueFactory<>("name"));
         clmDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
         clmFee.setCellValueFactory(new PropertyValueFactory<>("fee"));
-        clmTherapistsId.setCellValueFactory(new PropertyValueFactory<>("therapistId"));
 
         loadTherapyPrograms();
         generateNewID();
@@ -125,8 +109,7 @@ public class TherapyProgramManagementFormController implements Initializable {
                         therapyProgramDTO.getId(),
                         therapyProgramDTO.getName(),
                         therapyProgramDTO.getDuration(),
-                        therapyProgramDTO.getFee(),
-                        therapyProgramDTO.getTherapistId()
+                        therapyProgramDTO.getFee()
                 );
 
                 therapyProgramTMSList.add(therapyProgramTM);
@@ -145,13 +128,33 @@ public class TherapyProgramManagementFormController implements Initializable {
     }
 
     @FXML
-    void btnAddTherapistsOnAction(ActionEvent event) {
-        AdminPageController.getInstance().navigateToTherapistManagement();
-    }
-
-    @FXML
     void btnDelete_OnAction(ActionEvent event) {
+        TherapyProgramTM selectedTherapyProgram = tblTherapyPrograms.getSelectionModel().getSelectedItem();
+        if (selectedTherapyProgram == null) {
+            showAlert("Warning", "Please select a therapy program to delete!", Alert.AlertType.WARNING);
+            return;
+        }
 
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this therapy program?", ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> result = confirm.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.YES) {
+            try {
+                boolean isDelete = therapyProgramsBO.deleteTherapyPrograms(selectedTherapyProgram.getProgramId());
+
+                if (isDelete) {
+                    showAlert("Success", "Therapy program deleted successfully!", Alert.AlertType.INFORMATION);
+
+                } else {
+                    showAlert("Error", "Failed to delete therapy program!", Alert.AlertType.ERROR);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            loadTherapyPrograms();
+            clearFields();
+        }
     }
 
     @FXML
@@ -160,14 +163,13 @@ public class TherapyProgramManagementFormController implements Initializable {
         String name = txtProgramName.getText();
         int duration = Integer.parseInt(txtProgramDuration.getText());
         double fee = Double.parseDouble(txtFee.getText());
-        String therapistId = txtTherapistId.getText();
 
-        if(id.isEmpty() || name.isEmpty() || duration < 0 || fee < 0 || therapistId.isEmpty())  {
+        if(id.isEmpty() || name.isEmpty() || duration < 0 || fee < 0)  {
             showAlert("Warning", "Please fill all fields!", Alert.AlertType.WARNING);
             return;
         }
 
-        TherapyProgramDTO therapyProgramDTO = new TherapyProgramDTO(id, name, duration, fee, therapistId);
+        TherapyProgramDTO therapyProgramDTO = new TherapyProgramDTO(id, name, duration, fee);
         try{
             boolean isSaved = therapyProgramsBO.saveTherapyPrograms(therapyProgramDTO);
 
@@ -185,7 +187,37 @@ public class TherapyProgramManagementFormController implements Initializable {
 
     @FXML
     void btnUpdate_OnAction(ActionEvent event) {
+        String id = txtProgramId.getText();
+        String name = txtProgramName.getText();
+        int duration = Integer.parseInt(txtProgramDuration.getText());
+        double fee = Double.parseDouble(txtFee.getText());
 
+        if(id.isEmpty() || name.isEmpty() || duration < 0 || fee < 0)  {
+            showAlert("Warning", "Please fill all fields!", Alert.AlertType.WARNING);
+            return;
+        }
+
+        TherapyProgramDTO therapyProgramDTO = new TherapyProgramDTO(id, name, duration, fee );
+        try{
+            boolean isUpdate = therapyProgramsBO.updateTherapyPrograms(therapyProgramDTO);
+
+            if (isUpdate) {
+                showAlert("Success", "Therapy Program update successfully!", Alert.AlertType.INFORMATION);
+
+            } else {
+                showAlert("Error", "Failed to update Therapy Program!", Alert.AlertType.ERROR);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void clearFields() {
+        txtProgramId.clear();
+        txtProgramName.clear();
+        txtProgramDuration.clear();
+        txtFee.clear();
     }
 
     @FXML

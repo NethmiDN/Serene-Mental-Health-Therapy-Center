@@ -3,6 +3,8 @@ package lk.ijse.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -10,10 +12,11 @@ import lombok.*;
 @Table(name = "therapy_program")
 public class TherapyProgram {
     @Id
-    private String id;
+    @Column(name = "program_id", nullable = false, length = 50)
+    private String programId;
 
     @Column(nullable = false, unique = true)
-    private String name;
+    private String programName;
 
     @Column(nullable = false)
     private int duration;
@@ -21,7 +24,9 @@ public class TherapyProgram {
     @Column(nullable = false)
     private double fee;
 
-    @ManyToOne
-    @JoinColumn(name = "therapist_id", nullable = false)
-    private Therapist therapist;
+    @OneToMany(mappedBy = "therapyProgram", cascade = CascadeType.ALL)
+    private List<TherapistProgram> therapistPrograms;
+
+    @OneToMany(mappedBy = "therapyProgram", cascade = CascadeType.ALL)
+    private List<TherapySession> therapySessions;
 }

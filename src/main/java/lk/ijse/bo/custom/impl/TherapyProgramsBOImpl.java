@@ -58,8 +58,7 @@ public class TherapyProgramsBOImpl implements TherapyProgramsBO {
                             therapyProgram.getId(),
                             therapyProgram.getName(),
                             therapyProgram.getDuration(),
-                            therapyProgram.getFee(),
-                            therapyProgram.getTherapist().getId() // Fix: Extract therapist ID
+                            therapyProgram.getFee()
                     )
             );
         }
@@ -74,19 +73,13 @@ public class TherapyProgramsBOImpl implements TherapyProgramsBO {
     @Override
     public boolean saveTherapyPrograms(TherapyProgramDTO therapyProgramDTO) {
         // Retrieve the Therapist entity using the therapist ID
-        Therapist therapist = therapistDAO.getById(therapyProgramDTO.getTherapistId());
-
-        if (therapist == null) {
-            throw new IllegalArgumentException("Therapist not found for ID: " + therapyProgramDTO.getTherapistId());
-        }
 
         return therapyProgramDAO.save(
                 new TherapyProgram(
                         therapyProgramDTO.getId(),
                         therapyProgramDTO.getName(),
                         therapyProgramDTO.getDuration(),
-                        therapyProgramDTO.getFee(),
-                        therapist // Fix: Pass Therapist entity, not String
+                        therapyProgramDTO.getFee()
                 )
         );
     }
@@ -95,19 +88,13 @@ public class TherapyProgramsBOImpl implements TherapyProgramsBO {
     @Override
     public boolean updateTherapyPrograms(TherapyProgramDTO therapyProgramDTO) {
         // Retrieve the Therapist entity using the therapist ID
-        Therapist therapist = therapistDAO.getById(therapyProgramDTO.getTherapistId());
-
-        if (therapist == null) {
-            throw new IllegalArgumentException("Therapist not found for ID: " + therapyProgramDTO.getTherapistId());
-        }
 
         return therapyProgramDAO.update(
                 new TherapyProgram(
                         therapyProgramDTO.getId(),
                         therapyProgramDTO.getName(),
                         therapyProgramDTO.getDuration(),
-                        therapyProgramDTO.getFee(),
-                        therapist // Fix: Pass Therapist entity, not String
+                        therapyProgramDTO.getFee()
                 )
         );
     }
