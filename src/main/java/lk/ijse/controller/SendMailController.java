@@ -1,18 +1,11 @@
 package lk.ijse.controller;
 
 import javafx.scene.control.Alert;
-import org.hibernate.Session;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.net.Authenticator;
-import java.net.PasswordAuthentication;
 import java.util.Properties;
-
-import static org.hibernate.Session.*;
 
 public class SendMailController {
     public void sendEmail(String recipientEmail, String otp) {
@@ -26,26 +19,26 @@ public class SendMailController {
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
 
-//        Session.session(properties, new Authenticator() {
-//            @Override
-//            protected PasswordAuthentication getPasswordAuthentication() {
-//                return new PasswordAuthentication(senderEmail, senderPassword.toCharArray());
-//            }
-//        });
-//
-//        try {
-//            // Compose the message
-//            Message message = new MimeMessage((MimeMessage) session);
-//            message.setFrom(new InternetAddress(senderEmail));
-//            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
-//            message.setSubject("Your OTP Code");
-//            message.setText("Your OTP is: " + otp);
-//
-//            // Send the message
-//            Transport.send(message);
-//            new Alert(Alert.AlertType.INFORMATION, "Email sent successfully!").show();
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        }
+        javax.mail.Session session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(senderEmail, senderPassword);
+            }
+        });
+
+        try {
+            // Compose the message
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(senderEmail));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
+            message.setSubject("Your OTP Code");
+            message.setText("Your OTP is: " + otp);
+
+            // Send the message
+            Transport.send(message);
+            new Alert(Alert.AlertType.INFORMATION, "Email sent successfully!").show();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 }
