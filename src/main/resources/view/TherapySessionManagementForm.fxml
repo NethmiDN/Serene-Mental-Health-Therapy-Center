@@ -23,9 +23,9 @@
       <DatePicker fx:id="dpSessionDate" layoutX="130.0" layoutY="175.0" prefHeight="26.0" prefWidth="274.0" />
       <Label layoutX="34.0" layoutY="219.0" text="Session Time:" />
       <TextField fx:id="txtSessionTime" layoutX="130.0" layoutY="214.0" prefHeight="26.0" prefWidth="274.0" promptText="HH:MM" />
-      <JFXButton id="btnAddPatient" fx:id="btnAddPatient" layoutX="33.0" layoutY="272.0" onAction="#btnAddPatient_OnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Add Patient" />
-      <JFXButton id="btnAddTherapyProgram" fx:id="btnAddTherapyProgram" layoutX="163.0" layoutY="272.0" onAction="#btnAddTherapyProgram_OnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Add Program" />
-      <JFXButton id="btnAddTherapist" fx:id="btnAddTherapist" layoutX="293.0" layoutY="272.0" onAction="#btnAddTherapist_OnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Add Therapist" />
+      <JFXButton id="btnAddPatient" fx:id="btnAddPatient" layoutX="33.0" layoutY="272.0" onAction="#btnAddPatient_OnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #80C4E9;" text="+ Add Patient" />
+      <JFXButton id="btnAddTherapyProgram" fx:id="btnAddTherapyProgram" layoutX="163.0" layoutY="272.0" onAction="#btnAddTherapyProgram_OnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #80C4E9;" text="+ Add Program" />
+      <JFXButton id="btnAddTherapist" fx:id="btnAddTherapist" layoutX="293.0" layoutY="272.0" onAction="#btnAddTherapist_OnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #80C4E9;" text="+ Add Therapist" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="80.0" layoutX="28.0" layoutY="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30px; -fx-arc-width: 30px;" width="795.0">
          <fill>
             <LinearGradient endX="0.048" endY="0.712">
@@ -49,7 +49,7 @@
             <Font name="Ubuntu" size="27.0" />
          </font>
       </Label>
-      <JFXButton id="btnAddNewTherapist" fx:id="btnAddNewTherapist" layoutX="618.0" layoutY="42.0" onAction="#btnAddNew_OnAction" prefHeight="35.0" prefWidth="174.0" style="-fx-cursor: hand; -fx-background-color: #007bff;" text="+ New Therapy Programs" textFill="WHITE" />
+      <JFXButton id="btnAddNewTherapist" fx:id="btnAddNewTherapist" layoutX="618.0" layoutY="42.0" onAction="#btnAddNew_OnAction" prefHeight="35.0" prefWidth="174.0" style="-fx-cursor: hand; -fx-background-color: #80C4E9;" text="+ New Therapy Programs" />
       <AnchorPane fx:id="mainPane" layoutX="447.0" layoutY="123.0" prefHeight="207.0" prefWidth="368.0" style="-fx-background-color: #FFFFFF;" />
       <TableView fx:id="tblTherapySession" layoutX="34.0" layoutY="407.0" prefHeight="236.0" prefWidth="795.0">
          <columns>
@@ -62,8 +62,8 @@
             <TableColumn fx:id="clmTherapistId" prefWidth="93.5999755859375" text="Therapist ID" />
          </columns>
       </TableView>
-      <JFXButton id="btnAddTherapist" fx:id="btnCompleteSetup" layoutX="705.0" layoutY="350.0" onAction="#btnCompleteSetupOnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Complete Setup" />
-      <JFXButton id="btnAddTherapist" fx:id="btnReschedule" layoutX="563.0" layoutY="650.0" onAction="#btnRescheduleOnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Reschedule" />
-      <JFXButton id="btnAddTherapist" fx:id="btnCancel" layoutX="705.0" layoutY="650.0" onAction="#btnCancelOnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #007bff; -fx-text-fill: white;" text="Cancel" />
+      <JFXButton id="btnAddTherapist" fx:id="btnCompleteSetup" layoutX="705.0" layoutY="350.0" onAction="#btnCompleteSetupOnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #80C4E9;" text="Complete Setup" />
+      <JFXButton id="btnAddTherapist" fx:id="btnReschedule" layoutX="563.0" layoutY="650.0" onAction="#btnRescheduleOnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #80C4E9;" text="Reschedule" />
+      <JFXButton id="btnAddTherapist" fx:id="btnCancel" layoutX="705.0" layoutY="650.0" onAction="#btnCancelOnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #80C4E9;" text="Cancel" />
    </children>
 </AnchorPane>

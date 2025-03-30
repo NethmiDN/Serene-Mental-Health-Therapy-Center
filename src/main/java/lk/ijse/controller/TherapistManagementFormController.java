@@ -112,7 +112,6 @@ public class TherapistManagementFormController implements Initializable {
         //table ek reload wenn hdnn
     }
 
-
     @FXML
     void btnAddNew_OnAction(ActionEvent event) {
         clearFields();

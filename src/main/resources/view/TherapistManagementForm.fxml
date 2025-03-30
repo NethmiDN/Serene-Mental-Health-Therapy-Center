@@ -39,7 +39,7 @@
             <Font name="Ubuntu" size="27.0" />
          </font>
       </Label>
-      <JFXButton id="btnAddNewTherapist" fx:id="btnAddNewTherapist" layoutX="664.0" layoutY="32.0" onAction="#btnAddNew_OnAction" prefHeight="35.0" prefWidth="150.0" style="-fx-cursor: hand; -fx-background-color: #007bff;" text="+ New Therapist" textFill="WHITE" />
+      <JFXButton id="btnAddNewTherapist" fx:id="btnAddNewTherapist" layoutX="664.0" layoutY="32.0" onAction="#btnAddNew_OnAction" prefHeight="35.0" prefWidth="150.0" style="-fx-cursor: hand; -fx-background-color: #80C4E9;" text="+ New Therapist" />
       <TextField fx:id="txtTherapistId" layoutX="27.0" layoutY="131.0" prefHeight="26.0" prefWidth="262.0" promptText="Therapist ID:" />
       <TextField fx:id="txtTherapistName" layoutX="27.0" layoutY="176.0" prefHeight="26.0" prefWidth="522.0" promptText="Therapist Name:" />
       <TextField fx:id="txtTherapistSpecialty" layoutX="27.0" layoutY="218.0" prefHeight="26.0" prefWidth="522.0" promptText="Specialty:" />
