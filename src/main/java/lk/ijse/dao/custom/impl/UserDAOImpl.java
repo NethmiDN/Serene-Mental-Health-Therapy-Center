@@ -7,6 +7,8 @@ import lk.ijse.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -35,6 +37,16 @@ public class UserDAOImpl  implements UserDAO {
                     .setParameter("username", username)
                     .uniqueResult();
         }
+    }
+
+    @Override
+    public ArrayList<String> getAllRolls() {
+        return null;
+    }
+
+    @Override
+    public User findByRoll(String selectedId) throws SQLException, ClassNotFoundException {
+        return null;
     }
 
     @Override

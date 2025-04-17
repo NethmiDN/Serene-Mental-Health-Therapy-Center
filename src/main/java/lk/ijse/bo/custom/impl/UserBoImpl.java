@@ -7,6 +7,9 @@ import lk.ijse.entity.User;
 import lk.ijse.util.PasswordEncryptionUtil;
 import lk.ijse.util.Role;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class UserBoImpl implements UserBo {
     private final UserDAO userDAO = new UserDAOImpl();
 
@@ -20,5 +23,15 @@ public class UserBoImpl implements UserBo {
         User user = new User(newUserId, username,email, hashedPassword, role);
         userDAO.save(user);
         return true;
+    }
+
+    @Override
+    public ArrayList<String> getAllRoll() {
+        return userDAO.getAllRolls();
+    }
+
+    @Override
+    public User findByRoll(String selectedRoll) throws SQLException, ClassNotFoundException {
+        return userDAO.findByRoll(selectedRoll);
     }
 }

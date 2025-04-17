@@ -4,14 +4,14 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="259.0" prefWidth="522.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.TherapistTableFormController">
+<AnchorPane prefHeight="306.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.TherapistTableFormController">
 
-    <TableView fx:id="tblTherapist" onMouseClicked="#tblTherapistOnClick" prefHeight="259.0" prefWidth="522.0">
+    <TableView fx:id="tblTherapist" layoutX="4.0" layoutY="5.0" onMouseClicked="#tblTherapistOnClick" prefHeight="296.0" prefWidth="786.0">
         <columns>
-            <TableColumn fx:id="clmTherapistId" prefWidth="103.19994962215424" text="Therapist ID" />
-            <TableColumn fx:id="clmTherapistName" prefWidth="132.00000762939453" text="Therapist Name" />
-            <TableColumn fx:id="clmSpeciality" prefWidth="124.800048828125" text="Specialty" />
-            <TableColumn fx:id="clmAvailability" prefWidth="160.0000061035156" text="Availability" />
+            <TableColumn fx:id="clmTherapistId" prefWidth="134.3999695777893" text="Therapist ID" />
+            <TableColumn fx:id="clmTherapistName" prefWidth="208.0" text="Therapist Name" />
+            <TableColumn fx:id="clmSpeciality" prefWidth="241.59994506835938" text="Specialty" />
+            <TableColumn fx:id="clmAvailability" prefWidth="198.40008544921875" text="Availability" />
         </columns>
     </TableView>
 

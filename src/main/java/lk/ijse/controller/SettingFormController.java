@@ -82,21 +82,21 @@ public class SettingFormController implements Initializable {
     }
 
     private void loadRoll() throws SQLException, ClassNotFoundException {
-        //ArrayList<String> userIds = userBo.getAllRoll();
-        //cmbroll.setItems(FXCollections.observableArrayList(userIds));
+        ArrayList<String> userIds = userBo.getAllRoll();
+        cmbroll.setItems(FXCollections.observableArrayList(userIds));
     }
 
     @FXML
-    void cmbrollOnAction(ActionEvent event) {
+    void cmbrollOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         String selectedRoll = cmbroll.getSelectionModel().getSelectedItem();
         selectedRoll = selectedRoll.replace("[", "").replace("]", "");
         if (selectedRoll != null) {
-            //User userDTO = userBo.findByRoll(selectedRoll);
-//            if (userDTO != null) {
-//                unametxt.setText(userDTO.getUsername());
-//                emailtxt.setText(userDTO.getEmail());
-//                passwordtxt.setText(userDTO.getPassword());
-//            }
+            User userDTO = userBo.findByRoll(selectedRoll);
+            if (userDTO != null) {
+                unametxt.setText(userDTO.getUsername());
+                emailtxt.setText(userDTO.getEmail());
+                passwordtxt.setText(userDTO.getPassword());
+            }
         }
     }
 

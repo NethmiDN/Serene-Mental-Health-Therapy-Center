@@ -4,8 +4,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -50,20 +48,11 @@
          </font>
       </Label>
       <JFXButton id="btnAddNewTherapist" fx:id="btnAddNewTherapist" layoutX="618.0" layoutY="42.0" onAction="#btnAddNew_OnAction" prefHeight="35.0" prefWidth="174.0" style="-fx-cursor: hand; -fx-background-color: #80C4E9;" text="+ New Therapy Programs" />
-      <AnchorPane fx:id="mainPane" layoutX="447.0" layoutY="123.0" prefHeight="207.0" prefWidth="368.0" style="-fx-background-color: #FFFFFF;" />
-      <TableView fx:id="tblTherapySession" layoutX="34.0" layoutY="407.0" prefHeight="236.0" prefWidth="795.0">
-         <columns>
-            <TableColumn fx:id="clmSessionId" prefWidth="85.60000610351562" text="Session ID" />
-            <TableColumn fx:id="clmDate" prefWidth="115.19998931884766" text="Date" />
-            <TableColumn fx:id="clmTime" prefWidth="125.5999755859375" text="Time" />
-            <TableColumn fx:id="clmStatus" prefWidth="178.39999389648438" text="Status" />
-            <TableColumn fx:id="clmPatientId" prefWidth="103.2000732421875" text="Patient ID" />
-            <TableColumn fx:id="clmProgramId" prefWidth="99.20001220703125" text="Program ID" />
-            <TableColumn fx:id="clmTherapistId" prefWidth="93.5999755859375" text="Therapist ID" />
-         </columns>
-      </TableView>
-      <JFXButton id="btnAddTherapist" fx:id="btnCompleteSetup" layoutX="705.0" layoutY="350.0" onAction="#btnCompleteSetupOnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #80C4E9;" text="Complete Setup" />
-      <JFXButton id="btnAddTherapist" fx:id="btnReschedule" layoutX="563.0" layoutY="650.0" onAction="#btnRescheduleOnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #80C4E9;" text="Reschedule" />
-      <JFXButton id="btnAddTherapist" fx:id="btnCancel" layoutX="705.0" layoutY="650.0" onAction="#btnCancelOnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #80C4E9;" text="Cancel" />
+      <AnchorPane fx:id="mainPane" layoutX="34.0" layoutY="334.0" prefHeight="306.0" prefWidth="795.0" style="-fx-background-color: #FFFFFF;" />
+      <JFXButton id="btnAddTherapist" fx:id="btnCompleteSetup" layoutX="665.0" layoutY="272.0" onAction="#btnCompleteSetupOnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #80C4E9;" text="Complete Setup" />
+      <TextField fx:id="txtPatientId" layoutX="502.0" layoutY="136.0" prefHeight="26.0" prefWidth="274.0" promptText="Set Patient ID" />
+      <TextField fx:id="txtprogramId" layoutX="502.0" layoutY="181.0" prefHeight="26.0" prefWidth="274.0" promptText="Set Program ID" />
+      <TextField fx:id="txtTherapistId" layoutX="502.0" layoutY="233.0" prefHeight="26.0" prefWidth="274.0" promptText="Set Therapist ID" />
+      <JFXButton fx:id="btnSeeAll" layoutX="721.0" layoutY="657.0" onAction="#btnSeeAllOnAction" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: #80C4E9;" text="See All Sessions" />
    </children>
 </AnchorPane>

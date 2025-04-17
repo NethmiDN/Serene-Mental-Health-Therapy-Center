@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="settingap" prefHeight="700.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.SettingFormController">
    <children>
-      <ImageView fx:id="iconimg" fitHeight="85.0" fitWidth="79.0" layoutX="858.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iconimg" fitHeight="85.0" fitWidth="79.0" layoutX="680.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/user.png" />
          </image>
@@ -37,7 +37,7 @@
             <Font name="Comic Sans MS Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="savebtn" layoutX="479.0" layoutY="625.0" mnemonicParsing="false" onAction="#savebtnOnAction" prefHeight="34.0" prefWidth="400.0" style="-fx-background-color: #FFA24C;" text="Save">
+      <Button fx:id="savebtn" layoutX="435.0" layoutY="626.0" mnemonicParsing="false" onAction="#savebtnOnAction" prefHeight="34.0" prefWidth="400.0" style="-fx-background-color: #FFA24C;" text="Save">
          <font>
             <Font name="Comic Sans MS Bold" size="16.0" />
          </font>
@@ -77,7 +77,7 @@
             <TextField fx:id="passwordtxt" prefHeight="36.0" prefWidth="264.0" style="-fx-border-color: #091057; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px;" />
          </children>
       </HBox>
-      <ImageView fitHeight="524.0" fitWidth="448.0" layoutX="393.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="524.0" fitWidth="448.0" layoutX="377.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/setting.png" />
          </image>

@@ -7,8 +7,8 @@ import lombok.*;
 @Data
 
 public class TherapistTM {
-    private String id;
-    private String name;
+    private String therapistID;
+    private String therapistName;
     private String specialization;
     private String availability;
 }

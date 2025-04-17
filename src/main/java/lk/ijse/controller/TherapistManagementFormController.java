@@ -84,6 +84,11 @@ public class TherapistManagementFormController implements Initializable {
 
         // Load data into table
         loadTherapists();
+        generateNewId();
+    }
+
+    private void generateNewId() {
+        txtTherapistId.setText(therapistBO.getNaxtTherapistID());
     }
 
     private void loadTherapists() {
@@ -130,7 +135,7 @@ public class TherapistManagementFormController implements Initializable {
 
         if (result.isPresent() && result.get() == ButtonType.YES) {
             try {
-                boolean isDelete = therapistBO.deleteTherapist(selectedTherapist.getId());
+                boolean isDelete = therapistBO.deleteTherapist(selectedTherapist.getTherapistID());
 
                 if (isDelete) {
                     showAlert("Success", "Therapist deleted successfully!", Alert.AlertType.INFORMATION);
@@ -219,8 +224,8 @@ public class TherapistManagementFormController implements Initializable {
         if (selectedItem == null) {
             showAlert("Warning", "Please select a therapist", Alert.AlertType.WARNING);
         }else {
-            txtTherapistId.setText(selectedItem.getId());
-            txtTherapistName.setText(selectedItem.getName());
+            txtTherapistId.setText(selectedItem.getTherapistID());
+            txtTherapistName.setText(selectedItem.getTherapistName());
             txtTherapistSpecialty.setText(selectedItem.getSpecialization());
             txtTherapistAvailability.setText(selectedItem.getAvailability());
 

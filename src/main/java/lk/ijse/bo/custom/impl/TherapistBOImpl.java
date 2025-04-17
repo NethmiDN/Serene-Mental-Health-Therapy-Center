@@ -23,7 +23,7 @@ public class TherapistBOImpl implements TherapistBO {
                     new TherapistDTO
                             (therapist.getTherapistID(), therapist.getTherapistName(), therapist.getSpecialization(), therapist.getAvailability()
 
-            ));
+                            ));
         }
         return therapistDTOS;
     }
@@ -54,8 +54,4 @@ public class TherapistBOImpl implements TherapistBO {
     public boolean deleteTherapist(String therapistId) throws Exception {
         return therapistDAO.deleteByPK(therapistId);
     }
-
-
-
-
 }
