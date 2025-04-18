@@ -121,5 +121,4 @@ public class TherapySessionTableFormController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 }

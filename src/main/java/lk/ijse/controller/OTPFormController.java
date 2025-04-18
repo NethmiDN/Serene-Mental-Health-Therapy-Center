@@ -118,7 +118,7 @@ void submitOtpOnEnter(KeyEvent event) {
         System.out.println((txtOtp1.getText() + txtOtp2.getText() + txtOtp3.getText() + txtOtp4.getText()));
         if ((txtOtp1.getText() + txtOtp2.getText() + txtOtp3.getText() + txtOtp4.getText()).equals(CORRECT_OTP)) {
 
-            loadUI("/com/example/stitchwave/OTPVerifiedForm.fxml");
+            loadUI("/view/OTPVerifiedForm.fxml");
         } else {
             showErrorMessage("Incorrect OTP. Please try again.");
         }
