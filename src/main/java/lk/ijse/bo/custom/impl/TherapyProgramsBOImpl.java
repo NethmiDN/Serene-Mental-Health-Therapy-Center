@@ -62,7 +62,6 @@ public class TherapyProgramsBOImpl implements TherapyProgramsBO {
         );
     }
 
-
     @Override
     public boolean updateTherapyPrograms(TherapyProgramDTO therapyProgramDTO) {
         // Retrieve the Therapist entity using the therapist ID
