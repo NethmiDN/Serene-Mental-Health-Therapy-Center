@@ -13,4 +13,6 @@ public interface UserDAO extends CrudDAO <User>{
 
     User findByRoll(String selectedId) throws SQLException, ClassNotFoundException;
 
+    boolean isEmailExists(String email);
+
 }

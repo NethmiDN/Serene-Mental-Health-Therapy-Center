@@ -88,7 +88,7 @@ public class TherapistManagementFormController implements Initializable {
     }
 
     private void generateNewId() {
-        txtTherapistId.setText(therapistBO.getNaxtTherapistID());
+        txtTherapistId.setText(therapistBO.getNextTherapistID());
     }
 
     private void loadTherapists() {
@@ -257,4 +257,5 @@ public class TherapistManagementFormController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 }

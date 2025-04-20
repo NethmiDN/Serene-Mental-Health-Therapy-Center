@@ -79,6 +79,6 @@ public class TherapistTableFormController implements Initializable {
             TherapySessionManagementFormController.getInstance().setTherapistId(selectedItem.getTherapistID());
 
         }
-
     }
+
 }

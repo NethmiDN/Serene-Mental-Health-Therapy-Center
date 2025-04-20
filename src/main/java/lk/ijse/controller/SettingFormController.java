@@ -118,4 +118,3 @@ public class SettingFormController implements Initializable {
     }
 
 }
-

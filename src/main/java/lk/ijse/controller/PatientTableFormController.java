@@ -48,7 +48,6 @@ public class PatientTableFormController implements Initializable {
             showAlert("Warning", "Please select a program", Alert.AlertType.WARNING);
         }else {
             TherapySessionManagementFormController.getInstance().setPatientId(selectedItem.getId());
-
         }
 
     }
@@ -60,7 +59,6 @@ public class PatientTableFormController implements Initializable {
         clmContact.setCellValueFactory(new PropertyValueFactory<>("contactInfo"));
         clmGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
         clmHistory.setCellValueFactory(new PropertyValueFactory<>("medicalHistory"));
-
 
         loadPatients();
     }
@@ -95,4 +93,5 @@ public class PatientTableFormController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 }

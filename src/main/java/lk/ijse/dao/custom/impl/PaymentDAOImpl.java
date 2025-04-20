@@ -2,27 +2,27 @@ package lk.ijse.dao.custom.impl;
 
 import lk.ijse.bo.exception.DuplicateException;
 import lk.ijse.config.FactoryConfiguration;
-import lk.ijse.dao.custom.PatientDAO;
-import lk.ijse.entity.Patient;
+import lk.ijse.dao.custom.PaymentDAO;
+import lk.ijse.entity.Payment;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PatientDAOImpl implements PatientDAO {
+public class PaymentDAOImpl implements PaymentDAO {
+
     private final FactoryConfiguration factoryConfiguration = new FactoryConfiguration();
     @Override
-    public boolean save(Patient entity) {
+    public boolean save(Payment entity) {
         Session session = factoryConfiguration.getSession();
         Transaction tx = session.beginTransaction();
 
         try{
-            Patient existPatient = session.get(Patient.class, entity.getId());
+            Payment existPayment = session.get(Payment.class, entity.getPaymentId());
 
-            if(existPatient != null){
-                throw new DuplicateException("Patient id duplicated");
+            if(existPayment != null){
+                throw new DuplicateException("Payment id duplicated");
             }
             session.persist(entity);
             tx.commit();
@@ -38,7 +38,7 @@ public class PatientDAOImpl implements PatientDAO {
     }
 
     @Override
-    public boolean update(Patient entity) {
+    public boolean update(Payment entity) {
         return false;
     }
 
@@ -48,35 +48,46 @@ public class PatientDAOImpl implements PatientDAO {
     }
 
     @Override
-    public List<Patient> getAll() {
+    public List<Payment> getAll() {
         Session session = factoryConfiguration.getSession();
-        Query<Patient> query = session.createQuery("FROM Patient ", Patient.class);
-        ArrayList<Patient> patients = (ArrayList<Patient>) query.list();
-        return patients;
+        Transaction transaction = null;
+        List<Payment> paymentList = new ArrayList<>();
+
+        try {
+            transaction = session.beginTransaction();
+
+            paymentList = session.createQuery("FROM Payment", Payment.class).list();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return paymentList;
     }
 
     @Override
     public String getNextId() {
         Session session = factoryConfiguration.getSession();
         // Get the last user ID from the database
-        String lastId = session.createQuery("SELECT p.id FROM Patient p ORDER BY p.id DESC", String.class)
+        String lastId = session.createQuery("SELECT pa.id FROM Patient pa ORDER BY pa.id DESC", String.class)
                 .setMaxResults(1)
                 .uniqueResult();
 
         if (lastId != null) {
             int numericPart = Integer.parseInt(lastId.split("-")[1]) + 1;
-            return String.format("P00-%03d", numericPart);
+            return String.format("PA00-%03d", numericPart);
         } else {
-            return "P00-001"; // First user ID
+            return "PA00-001"; // First user ID
         }
     }
 
     @Override
-    public Patient findById(String id) {
-        Session session = factoryConfiguration.getSession();
-        Patient patient = session.get(Patient.class, id);
-        session.close();
-        return patient;
+    public Payment findById(String id) {
+        return null;
     }
 
 }

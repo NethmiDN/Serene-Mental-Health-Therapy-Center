@@ -32,7 +32,6 @@ public class LoginPageController {
     @FXML
     private Label lblForgotPassword;
 
-
     @FXML
     private Label lblLogin;
 
@@ -117,4 +116,5 @@ public class LoginPageController {
         }
         isPasswordVisible = !isPasswordVisible;
     }
+
 }

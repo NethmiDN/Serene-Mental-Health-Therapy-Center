@@ -13,4 +13,5 @@ public class PatientTM {
     private String contactInfo;
     private String gender;
     private String medicalHistory;
+
 }

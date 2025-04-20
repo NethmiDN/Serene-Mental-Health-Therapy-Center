@@ -78,6 +78,7 @@ public class PatientManagementController implements Initializable {
     private TextField txtSearch;
 
     private final PatientBO patientBO = new PatientBOImpl();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         clmPatientId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -85,7 +86,6 @@ public class PatientManagementController implements Initializable {
         clmContact.setCellValueFactory(new PropertyValueFactory<>("contactInfo"));
         clmGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
         clmMedicalHistory.setCellValueFactory(new PropertyValueFactory<>("medicalHistory"));
-
 
         loadPatients();
         try {
@@ -200,4 +200,5 @@ public class PatientManagementController implements Initializable {
     void tblPatientOnClick(MouseEvent event) {
 
     }
+
 }

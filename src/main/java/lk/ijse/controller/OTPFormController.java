@@ -19,38 +19,38 @@ import java.util.Objects;
 
 public class OTPFormController {
 
-@FXML
-private JFXButton btnVerify;
+    @FXML
+    private JFXButton btnVerify;
 
-@FXML
-private ImageView girl;
+    @FXML
+    private ImageView girl;
 
-@FXML
-private ImageView imgBack;
+    @FXML
+    private ImageView imgBack;
 
-@FXML
-private Label lblError;
+    @FXML
+    private Label lblError;
 
-@FXML
-private Label lblResend;
+    @FXML
+    private Label lblResend;
 
-@FXML
-private Label lblResendTimer;
+    @FXML
+    private Label lblResendTimer;
 
-@FXML
-private AnchorPane rootPane;
+    @FXML
+    private AnchorPane rootPane;
 
-@FXML
-private TextField txtOtp1;
+    @FXML
+    private TextField txtOtp1;
 
-@FXML
-private TextField txtOtp2;
+    @FXML
+    private TextField txtOtp2;
 
-@FXML
-private TextField txtOtp3;
+    @FXML
+    private TextField txtOtp3;
 
-@FXML
-private TextField txtOtp4;
+    @FXML
+    private TextField txtOtp4;
 
     private int secondsRemaining = 120;
 
@@ -80,37 +80,37 @@ private TextField txtOtp4;
         }
     }
 
-@FXML
-void btnVerifyOnAction(ActionEvent event) {
-    submitOtp();
-}
-
-@FXML
-void imgBackOnAction(MouseEvent event) {
-    loadUI("/view/ForgetPasswordForm.fxml");
-}
-
-@FXML
-void moveToNextField() {
-    if (!txtOtp1.getText().isEmpty()) txtOtp2.requestFocus();
-    if (!txtOtp2.getText().isEmpty()) txtOtp3.requestFocus();
-    if (!txtOtp3.getText().isEmpty()) txtOtp4.requestFocus();
-    checkFieldsFilled();
-}
-
-@FXML
-void resendOtp(MouseEvent event) {
-    lblResend.setDisable(true);
-    secondsRemaining = 120;
-    startTimer();
-}
-
-@FXML
-void submitOtpOnEnter(KeyEvent event) {
-    if (!txtOtp4.getText().isEmpty()) {
+    @FXML
+    void btnVerifyOnAction(ActionEvent event) {
         submitOtp();
     }
-}
+
+    @FXML
+    void imgBackOnAction(MouseEvent event) {
+        loadUI("/view/ForgetPasswordForm.fxml");
+    }
+
+    @FXML
+    void moveToNextField() {
+        if (!txtOtp1.getText().isEmpty()) txtOtp2.requestFocus();
+        if (!txtOtp2.getText().isEmpty()) txtOtp3.requestFocus();
+        if (!txtOtp3.getText().isEmpty()) txtOtp4.requestFocus();
+        checkFieldsFilled();
+    }
+
+    @FXML
+    void resendOtp(MouseEvent event) {
+        lblResend.setDisable(true);
+        secondsRemaining = 120;
+        startTimer();
+    }
+
+    @FXML
+    void submitOtpOnEnter(KeyEvent event) {
+        if (!txtOtp4.getText().isEmpty()) {
+        submitOtp();
+        }
+    }
 
     @FXML
     void submitOtp() {

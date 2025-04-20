@@ -10,6 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.view.tdm.InvoiceTM;
+
+import java.time.LocalDate;
 
 public class InvoiceManagementController {
 
@@ -29,16 +32,16 @@ public class InvoiceManagementController {
     private JFXButton btnUpdate;
 
     @FXML
-    private TableColumn<?, ?> colDate;
+    private TableColumn<InvoiceTM, LocalDate> colDate;
 
     @FXML
-    private TableColumn<?, ?> colInvoiceId;
+    private TableColumn<InvoiceTM, String> colInvoiceId;
 
     @FXML
-    private TableColumn<?, ?> colStatus;
+    private TableColumn<InvoiceTM, String> colStatus;
 
     @FXML
-    private TableColumn<?, ?> colTotalAmount;
+    private TableColumn<InvoiceTM, Double> colTotalAmount;
 
     @FXML
     private DatePicker dpInvoiceDate;
@@ -47,7 +50,7 @@ public class InvoiceManagementController {
     private ImageView imgHome;
 
     @FXML
-    private TableView<?> tblInvoice;
+    private TableView<InvoiceTM> tblInvoice;
 
     @FXML
     private TextField txtInvoiceId;
@@ -97,4 +100,3 @@ public class InvoiceManagementController {
     }
 
 }
-

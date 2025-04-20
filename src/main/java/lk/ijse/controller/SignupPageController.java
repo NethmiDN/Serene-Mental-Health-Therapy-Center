@@ -102,4 +102,5 @@ public class SignupPageController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 }

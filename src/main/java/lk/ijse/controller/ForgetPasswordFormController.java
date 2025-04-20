@@ -42,10 +42,7 @@ public class ForgetPasswordFormController  {
 
     public static String emailAddress = "";
 
-
-
     private final UserBo userBo = new UserBoImpl();
-
 
     public static String otpGenerated = "0000";
 

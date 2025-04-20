@@ -124,4 +124,5 @@ public class TherapistDAOImpl implements TherapistDAO {
             throw new NotFoundException("Therapist not found");
         }
     }
+
 }

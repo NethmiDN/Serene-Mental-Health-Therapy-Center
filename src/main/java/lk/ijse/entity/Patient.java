@@ -15,7 +15,6 @@ import java.util.List;
 public class Patient {
     @Id
     private String id;
-
     private String name;
     private String contactInfo;
     private String gender;
@@ -26,4 +25,5 @@ public class Patient {
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<Payment> payments;
+
 }

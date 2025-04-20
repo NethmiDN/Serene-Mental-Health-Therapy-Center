@@ -24,38 +24,38 @@ import java.util.Objects;
 
 public class OTPVerifiedFormController {
 
-        @FXML
-        private JFXButton btnReset;
+    @FXML
+    private JFXButton btnReset;
 
-        @FXML
-        private ImageView imgBack;
+    @FXML
+    private ImageView imgBack;
 
-        @FXML
-        private ImageView imgConfirmPasswordView;
+    @FXML
+    private ImageView imgConfirmPasswordView;
 
-        @FXML
-        private ImageView imgPasswordView;
+    @FXML
+    private ImageView imgPasswordView;
 
-        @FXML
-        private Label lblError;
+    @FXML
+    private Label lblError;
 
-        @FXML
-        private Label lblLogin;
+    @FXML
+    private Label lblLogin;
 
-        @FXML
-        private AnchorPane rootPane;
+    @FXML
+    private AnchorPane rootPane;
 
-        @FXML
-        private PasswordField txtConfirmPassword;
+    @FXML
+    private PasswordField txtConfirmPassword;
 
-        @FXML
-        private TextField txtConfirmPasswordVisible;
+    @FXML
+    private TextField txtConfirmPasswordVisible;
 
-        @FXML
-        private PasswordField txtPassword;
+    @FXML
+    private PasswordField txtPassword;
 
-        @FXML
-        private TextField txtPasswordVisible;
+    @FXML
+    private TextField txtPasswordVisible;
 
     private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$";
 
@@ -70,55 +70,55 @@ public class OTPVerifiedFormController {
         txtPassword.requestFocus();
     }
 
-        @FXML
-        void btnResetOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
-            if (areFieldsEmpty()) {
-                showErrorMessage("*Required fields cannot be empty.");
-            } else if (!isValidPassword(txtPassword.getText())) {
-                showErrorMessage("*Password must be at least 8 characters long, contain a digit, a lowercase letter, an uppercase letter, and a special character.");
-            } else if (!txtPassword.getText().equals(txtConfirmPassword.getText())) {
-                showErrorMessage("*Passwords do not match.");
+    @FXML
+    void btnResetOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        if (areFieldsEmpty()) {
+            showErrorMessage("*Required fields cannot be empty.");
+        } else if (!isValidPassword(txtPassword.getText())) {
+            showErrorMessage("*Password must be at least 8 characters long, contain a digit, a lowercase letter, an uppercase letter, and a special character.");
+        } else if (!txtPassword.getText().equals(txtConfirmPassword.getText())) {
+            showErrorMessage("*Passwords do not match.");
+        } else {
+            if (updateUser()) {
+                loadUI("/view/LoginPage.fxml");
             } else {
-                if (updateUser()) {
-                    loadUI("/view/LoginPage.fxml");
-                } else {
-                    showErrorMessage("*User not updated.");
-                }
+                showErrorMessage("*User not updated.");
             }
         }
+    }
 
-        @FXML
-        void imgBackOnAction(MouseEvent event) {
-            loadUI("/view/LoginPage.fxml");
-        }
+    @FXML
+    void imgBackOnAction(MouseEvent event) {
+        loadUI("/view/LoginPage.fxml");
+    }
 
-        @FXML
-        void imgConfirmPasswordViewOnAction(MouseEvent event) {
-            if (isConfirmPasswordVisible) {
-                txtConfirmPassword.setText(txtConfirmPasswordVisible.getText());
-                txtConfirmPasswordVisible.setVisible(false);
-                txtConfirmPassword.setVisible(true);
-            } else {
-                txtConfirmPasswordVisible.setText(txtConfirmPassword.getText());
-                txtConfirmPasswordVisible.setVisible(true);
-                txtConfirmPassword.setVisible(false);
-            }
-            isConfirmPasswordVisible = !isConfirmPasswordVisible;
+    @FXML
+    void imgConfirmPasswordViewOnAction(MouseEvent event) {
+        if (isConfirmPasswordVisible) {
+            txtConfirmPassword.setText(txtConfirmPasswordVisible.getText());
+            txtConfirmPasswordVisible.setVisible(false);
+            txtConfirmPassword.setVisible(true);
+        } else {
+            txtConfirmPasswordVisible.setText(txtConfirmPassword.getText());
+            txtConfirmPasswordVisible.setVisible(true);
+            txtConfirmPassword.setVisible(false);
         }
+        isConfirmPasswordVisible = !isConfirmPasswordVisible;
+    }
 
-        @FXML
-        void imgPasswordViewOnAction(MouseEvent event) {
-            if (isPasswordVisible) {
-                txtPassword.setText(txtPasswordVisible.getText());
-                txtPasswordVisible.setVisible(false);
-                txtPassword.setVisible(true);
-            } else {
-                txtPasswordVisible.setText(txtPassword.getText());
-                txtPasswordVisible.setVisible(true);
-                txtPassword.setVisible(false);
-            }
-            isPasswordVisible = !isPasswordVisible;
+    @FXML
+    void imgPasswordViewOnAction(MouseEvent event) {
+        if (isPasswordVisible) {
+            txtPassword.setText(txtPasswordVisible.getText());
+            txtPasswordVisible.setVisible(false);
+            txtPassword.setVisible(true);
+        } else {
+            txtPasswordVisible.setText(txtPassword.getText());
+            txtPasswordVisible.setVisible(true);
+            txtPassword.setVisible(false);
         }
+        isPasswordVisible = !isPasswordVisible;
+    }
 
     private boolean updateUser() throws SQLException, ClassNotFoundException {
         final List<UserDTO> allUsers = userBo.getAllUser();

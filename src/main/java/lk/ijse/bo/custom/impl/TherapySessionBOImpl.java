@@ -1,5 +1,6 @@
 package lk.ijse.bo.custom.impl;
 
+import lk.ijse.bo.custom.PaymentBO;
 import lk.ijse.bo.custom.TherapySessionBO;
 import lk.ijse.dao.custom.PatientDAO;
 import lk.ijse.dao.custom.TherapistDAO;
@@ -23,15 +24,16 @@ public class TherapySessionBOImpl implements TherapySessionBO {
     private final PatientDAO patientDAO = new PatientDAOImpl();
     private final TherapistDAO therapistDAO = new TherapistDAOImpl();
     private final TherapyProgramDAO programDAO = new TherapyProgramDAOImpl();
+    private final PaymentBO paymentBO = new PaymentBOImpl();
 
-    public void bookSession(String sessionId, String patientId, String therapistId, String programId,
-                            LocalDate date, LocalTime time) {
+    public boolean bookSession(String sessionId, String patientId, String therapistId, String programId,
+                               LocalDate date, LocalTime time) {
 
         // Check for conflicts
         List<TherapySession> existing = sessionDAO.findByTherapistAndTime(therapistId, date, time);
         if (!existing.isEmpty()) {
             System.out.println("Therapist is not available at this time.");
-            return;
+            return false;
         }
 
         TherapySession session = new TherapySession();
@@ -47,9 +49,10 @@ public class TherapySessionBOImpl implements TherapySessionBO {
         System.out.println("Session booked successfully.");
 
 //         Optional: Set availability manually if you want to reflect it elsewhere
-         Therapist therapist = session.getTherapist();
-         therapist.setAvailability("BUSY");
-         therapistDAO.update(therapist); // if you have this
+        Therapist therapist = session.getTherapist();
+        therapist.setAvailability("BUSY");
+        therapistDAO.update(therapist); // if you have this
+        return false;
     }
 
     public boolean rescheduleSession(String sessionId, LocalDate newDate, LocalTime newTime) {
@@ -118,4 +121,10 @@ public class TherapySessionBOImpl implements TherapySessionBO {
             return null;
         }
     }
+
+    @Override
+    public boolean bookSessionWithPayment(String sessionId, String patientId, String therapistId, String programId, LocalDate sessionDate, LocalTime sessionTime, String paymentId) {
+        return false;
+    }
+
 }

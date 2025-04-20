@@ -257,6 +257,6 @@ public class TherapyProgramManagementFormController implements Initializable {
             btnDelete.setDisable(false);
             btnUpdate.setDisable(false);
         }
-
     }
+
 }

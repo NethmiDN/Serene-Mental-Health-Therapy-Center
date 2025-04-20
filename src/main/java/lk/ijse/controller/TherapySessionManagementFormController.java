@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -14,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.bo.custom.TherapySessionBO;
 import lk.ijse.bo.custom.impl.TherapySessionBOImpl;
+import lk.ijse.dto.PaymentDTO;
 import lk.ijse.dto.TherapySessionDTO;
 
 import java.io.IOException;
@@ -21,6 +23,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class TherapySessionManagementFormController implements Initializable {
@@ -84,7 +87,8 @@ public class TherapySessionManagementFormController implements Initializable {
 
     public void setTherapistId(String id) {txtTherapistId.setText(id);}
 
-    private final TherapySessionBO therapySessionBO = new TherapySessionBOImpl();
+    private final  TherapySessionBO therapySessionBO = new TherapySessionBOImpl();
+    PaymentManagementController paymentFormController = new PaymentManagementController();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -111,22 +115,153 @@ public class TherapySessionManagementFormController implements Initializable {
     @FXML
     void btnCompleteSetupOnAction(ActionEvent event) {
         try {
-            String sessionId = txtSessionId.getText();
-            String patientId = txtPatientId.getText();
-            String therapistId = txtTherapistId.getText();
-            String programId = txtprogramId.getText();
-            LocalDate date = dpSessionDate.getValue();
-            LocalTime time = LocalTime.parse(txtSessionTime.getText());
+            // Step 1: Validate input fields
+            if (!validateInputs()) {
+                return;
+            }
 
-            therapySessionBO.bookSession(sessionId, patientId, therapistId, programId, date, time);
+            // Step 2: Collect session data
+            TherapySessionDTO sessionDTO = collectSessionData();
 
-            showAlert("Success", "Therapy session booked!", Alert.AlertType.INFORMATION);
-            clearFields();
+            // Step 3: Ask for confirmation
+            if (confirmSessionBooking()) {
+                // Step 4: Navigate to payment form
+                navigateToPaymentForm(sessionDTO);
+            }
         } catch (Exception e) {
             showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
+            e.printStackTrace();
+        }
+    }
+
+    private boolean validateInputs() {
+        // Validate session ID
+        if (txtSessionId.getText().trim().isEmpty()) {
+            showAlert("Validation Error", "Session ID cannot be empty", Alert.AlertType.ERROR);
+            txtSessionId.requestFocus();
+            return false;
         }
 
+        // Validate patient ID
+        if (txtPatientId.getText().trim().isEmpty()) {
+            showAlert("Validation Error", "Patient ID cannot be empty", Alert.AlertType.ERROR);
+            txtPatientId.requestFocus();
+            return false;
+        }
+
+        // Validate therapist ID
+        if (txtTherapistId.getText().trim().isEmpty()) {
+            showAlert("Validation Error", "Therapist ID cannot be empty", Alert.AlertType.ERROR);
+            txtTherapistId.requestFocus();
+            return false;
+        }
+
+        // Validate program ID
+        if (txtprogramId.getText().trim().isEmpty()) {
+            showAlert("Validation Error", "Program ID cannot be empty", Alert.AlertType.ERROR);
+            txtprogramId.requestFocus();
+            return false;
+        }
+
+        // Validate date
+        if (dpSessionDate.getValue() == null) {
+            showAlert("Validation Error", "Session date must be selected", Alert.AlertType.ERROR);
+            dpSessionDate.requestFocus();
+            return false;
+        }
+
+        // Validate time
+        try {
+            LocalTime.parse(txtSessionTime.getText());
+        } catch (Exception e) {
+            showAlert("Validation Error", "Session time must be in a valid format (HH:MM)", Alert.AlertType.ERROR);
+            txtSessionTime.requestFocus();
+            return false;
+        }
+
+        return true;
     }
+
+    private TherapySessionDTO collectSessionData() {
+        TherapySessionDTO sessionDTO = new TherapySessionDTO();
+        sessionDTO.setSessionId(txtSessionId.getText());
+        sessionDTO.setPatientId(txtPatientId.getText());
+        sessionDTO.setTherapistId(txtTherapistId.getText());
+        sessionDTO.setProgramId(txtprogramId.getText());
+        sessionDTO.setSessionDate(dpSessionDate.getValue());
+        sessionDTO.setSessionTime(LocalTime.parse(txtSessionTime.getText()));
+        return sessionDTO;
+    }
+
+    private boolean confirmSessionBooking() {
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,
+                "Pay payment to confirm this session",
+                ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> result = confirm.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.YES;
+    }
+
+    private void navigateToPaymentForm(TherapySessionDTO sessionDTO) throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Manage-Payment-Form.fxml"));
+            AnchorPane pane = loader.load();
+
+            // Get the actual controller instance associated with the FXML
+            PaymentManagementController paymentController = loader.getController();
+
+            // Set session details
+            paymentController.setSessionId(sessionDTO.getSessionId());
+
+            // Now display the pane
+            sessionPane.getChildren().setAll(pane);
+
+            // Simulate the user completing the form and saving payment
+            PaymentDTO dto = paymentController.savePaymentWithSession();
+
+            if (dto != null) {
+                handlePaymentComplete(sessionDTO, dto);
+            }
+
+        } catch (IOException e) {
+            showAlert("Error", "Failed to load payment form!", Alert.AlertType.ERROR);
+            e.printStackTrace();
+        }
+    }
+
+
+    private void handlePaymentComplete(TherapySessionDTO sessionDTO, PaymentDTO paymentDTO) {
+        try {
+            // Step 1: Save the session with payment reference
+            boolean isBooked = therapySessionBO.bookSession(
+                    sessionDTO.getSessionId(),
+                    sessionDTO.getPatientId(),
+                    sessionDTO.getTherapistId(),
+                    sessionDTO.getProgramId(),
+                    sessionDTO.getSessionDate(),
+                    sessionDTO.getSessionTime()
+            );
+
+            if (isBooked) {
+                showAlert("Success", "Therapy session booked successfully with payment ID: " +
+                        paymentDTO.getPaymentId(), Alert.AlertType.INFORMATION);
+                clearFields();
+
+                // Navigate back to session list or dashboard
+//                navigateToSessionList();
+            } else {
+                showAlert("Error", "Failed to book session.", Alert.AlertType.ERROR);
+            }
+        } catch (Exception e) {
+            showAlert("Error", "Error saving session: " + e.getMessage(), Alert.AlertType.ERROR);
+            e.printStackTrace();
+        }
+    }
+
+//    private void navigateToSessionList() throws IOException {
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Therapy-Session-List-Form.fxml"));
+//        AnchorPane pane = loader.load();
+//        sessionPane.getChildren().setAll(pane);
+//    }
 
     @FXML
     void btnCancelOnAction(ActionEvent event) {
@@ -226,5 +361,5 @@ public class TherapySessionManagementFormController implements Initializable {
         txtSessionTime.clear();
         dpSessionDate.setValue(null);
     }
-}
 
+}

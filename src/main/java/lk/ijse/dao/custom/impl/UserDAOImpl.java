@@ -55,6 +55,11 @@ public class UserDAOImpl  implements UserDAO {
     }
 
     @Override
+    public boolean isEmailExists(String email) {
+        return false;
+    }
+
+    @Override
     public boolean save(User user) {
         Transaction transaction = null;
         try (Session session = factoryConfiguration.getSession()) {
@@ -83,4 +88,5 @@ public class UserDAOImpl  implements UserDAO {
     public List<User> getAll() {
         return List.of();
     }
+
 }

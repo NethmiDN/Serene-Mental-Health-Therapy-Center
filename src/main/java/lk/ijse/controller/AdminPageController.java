@@ -143,4 +143,5 @@ public class AdminPageController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Failed to load page!").show();
         }
     }
+
 }
