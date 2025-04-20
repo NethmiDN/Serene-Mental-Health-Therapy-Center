@@ -14,10 +14,9 @@ module lk.ijse {
     requires java.naming;
     requires java.mail;
 
-
-    opens lk.ijse.controller to javafx.fxml;
+    opens lk.ijse.controller to javafx.fxml, jakarta.persistence;
     opens lk.ijse.entity to org.hibernate.orm.core;
-    opens lk.ijse.config to jakarta.persistence;
+    opens lk.ijse.config to jakarta.persistence, javafx.fxml;
     opens lk.ijse.view.tdm to javafx.base;
 //    opens edu.ijse.inspira1stsemesterproject.view.tdm to javafx.base;
     exports lk.ijse;
