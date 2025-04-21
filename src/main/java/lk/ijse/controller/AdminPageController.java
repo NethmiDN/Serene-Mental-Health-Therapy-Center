@@ -126,7 +126,6 @@ public class AdminPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         navigateTo("/view/Home.fxml");
-
     }
 
     private void navigateTo(String fxmlPath) {

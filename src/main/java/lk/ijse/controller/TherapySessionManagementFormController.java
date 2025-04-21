@@ -88,12 +88,12 @@ public class TherapySessionManagementFormController implements Initializable {
     public void setTherapistId(String id) {txtTherapistId.setText(id);}
 
     private final  TherapySessionBO therapySessionBO = new TherapySessionBOImpl();
+
     PaymentManagementController paymentFormController = new PaymentManagementController();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadUI("/view/Patient-Table-View.fxml");
-
     }
 
     @FXML
@@ -109,7 +109,6 @@ public class TherapySessionManagementFormController implements Initializable {
     @FXML
     void btnAddTherapyProgram_OnAction(ActionEvent event) {
         loadUI("/view/TherapyProgram-Table-View.fxml");
-
     }
 
     @FXML
@@ -122,11 +121,13 @@ public class TherapySessionManagementFormController implements Initializable {
 
             // Step 2: Collect session data
             TherapySessionDTO sessionDTO = collectSessionData();
+            handlePaymentComplete(sessionDTO);
 
             // Step 3: Ask for confirmation
             if (confirmSessionBooking()) {
                 // Step 4: Navigate to payment form
                 navigateToPaymentForm(sessionDTO);
+
             }
         } catch (Exception e) {
             showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
@@ -203,6 +204,7 @@ public class TherapySessionManagementFormController implements Initializable {
 
     private void navigateToPaymentForm(TherapySessionDTO sessionDTO) throws IOException {
         try {
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Manage-Payment-Form.fxml"));
             AnchorPane pane = loader.load();
 
@@ -211,16 +213,17 @@ public class TherapySessionManagementFormController implements Initializable {
 
             // Set session details
             paymentController.setSessionId(sessionDTO.getSessionId());
+            paymentController.setParentController(this);
 
             // Now display the pane
             sessionPane.getChildren().setAll(pane);
 
             // Simulate the user completing the form and saving payment
-            PaymentDTO dto = paymentController.savePaymentWithSession();
+            paymentController.savePaymentWithSession();
 
-            if (dto != null) {
-                handlePaymentComplete(sessionDTO, dto);
-            }
+//            if (dto != null) {
+//                handlePaymentComplete(sessionDTO);
+//            }
 
         } catch (IOException e) {
             showAlert("Error", "Failed to load payment form!", Alert.AlertType.ERROR);
@@ -228,10 +231,8 @@ public class TherapySessionManagementFormController implements Initializable {
         }
     }
 
-
-    private void handlePaymentComplete(TherapySessionDTO sessionDTO, PaymentDTO paymentDTO) {
+    private void handlePaymentComplete(TherapySessionDTO sessionDTO) {
         try {
-            // Step 1: Save the session with payment reference
             boolean isBooked = therapySessionBO.bookSession(
                     sessionDTO.getSessionId(),
                     sessionDTO.getPatientId(),
@@ -242,12 +243,10 @@ public class TherapySessionManagementFormController implements Initializable {
             );
 
             if (isBooked) {
-                showAlert("Success", "Therapy session booked successfully with payment ID: " +
-                        paymentDTO.getPaymentId(), Alert.AlertType.INFORMATION);
+                showAlert("Success", "Therapy session booked successfully", Alert.AlertType.INFORMATION);
                 clearFields();
 
-                // Navigate back to session list or dashboard
-//                navigateToSessionList();
+
             } else {
                 showAlert("Error", "Failed to book session.", Alert.AlertType.ERROR);
             }
@@ -257,11 +256,20 @@ public class TherapySessionManagementFormController implements Initializable {
         }
     }
 
-//    private void navigateToSessionList() throws IOException {
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Therapy-Session-List-Form.fxml"));
-//        AnchorPane pane = loader.load();
-//        sessionPane.getChildren().setAll(pane);
-//    }
+    public void onPaymentCompleted() {
+        try {
+            navigateToSessionList();
+        } catch (IOException e) {
+            showAlert("Error", "Could not navigate to session list after payment", Alert.AlertType.ERROR);
+            e.printStackTrace();
+        }
+    }
+
+    private void navigateToSessionList() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TherapySession-Table-View.fxml"));
+        AnchorPane pane = loader.load();
+        sessionPane.getChildren().setAll(pane);
+    }
 
     @FXML
     void btnCancelOnAction(ActionEvent event) {
@@ -270,7 +278,6 @@ public class TherapySessionManagementFormController implements Initializable {
 
     @FXML
     void btnRescheduleOnAction(ActionEvent event) {
-
 
         // For now, reschedule to a new hardcoded time (e.g., next day, same time)
         LocalDate newDate = dpSessionDate.getValue(); // you can show date/time pickers
@@ -319,7 +326,6 @@ public class TherapySessionManagementFormController implements Initializable {
             e.printStackTrace();
         }
     }
-
 
     @FXML
     void btnSeeAllOnAction(ActionEvent event) {

@@ -85,7 +85,7 @@ public class PaymentManagementController implements Initializable {
     private TextField txtSessionId;
 
     @FXML
-    private TextField txtStatus;
+    private ComboBox<String> cmbFilterStatus;
 
     private Map<String, String> patientNameIdMap = new HashMap<>();
 
@@ -101,6 +101,12 @@ public class PaymentManagementController implements Initializable {
 
     public void setSessionId(String sessionId) {
         this.txtSessionId.setText(sessionId);
+    }
+
+    private TherapySessionManagementFormController parentController;
+
+    public void setParentController(TherapySessionManagementFormController controller) {
+        this.parentController = controller;
     }
 
     private final TherapyProgramsBO programsBO = new TherapyProgramsBOImpl();
@@ -119,6 +125,8 @@ public class PaymentManagementController implements Initializable {
         generateNewPaymentID();
         loadPatientCombo();
         loadPayments();
+        cmbFilterStatus.setItems(FXCollections.observableArrayList("ALL", "PENDING", "COMPLETED"));
+
     }
 
     private void generateNewPaymentID() {
@@ -169,19 +177,13 @@ public class PaymentManagementController implements Initializable {
         }
     }
 
-    public void setOnPaymentCompleteListener(Object o) {
-    }
+    @FXML
+    void cmbPatientOnAction(ActionEvent event) {
 
-    public void setSessionData(TherapySessionDTO sessionDTO) {
     }
 
     @FXML
     void btnClear_OnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnGetInvoice_OnAction(ActionEvent event) {
 
     }
 
@@ -191,8 +193,18 @@ public class PaymentManagementController implements Initializable {
     }
 
     @FXML
-    void btnSave_OnAction(ActionEvent event) {
+    void btnGetInvoice_OnAction(ActionEvent event) {
 
+    }
+
+    @FXML
+    void btnSave_OnAction(ActionEvent event) {
+        boolean isSave =  savePaymentWithSession();
+        if (isSave) {
+            showAlert("Success", "Payment Saved!", Alert.AlertType.INFORMATION);
+        }else{
+            showAlert("Error", "Failed to save payment!", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
@@ -205,18 +217,18 @@ public class PaymentManagementController implements Initializable {
 
     }
 
-    public PaymentDTO savePaymentWithSession() {
+    public boolean savePaymentWithSession() {
         String paymentId = txtPaymentId.getText();
         String amountText = txtAmount.getText();
         LocalDate date = dpPaymentDate.getValue();
-        String status = txtStatus.getText();
+        String status = cmbFilterStatus.getValue();
         String selectedName = cmbPatient.getValue();
         String sessionId = txtSessionId.getText();
 
         if (paymentId.isEmpty() || amountText.isEmpty() || date == null ||
                 status.isEmpty() || selectedName == null || sessionId.isEmpty()) {
             showAlert("Warning", "Please fill all fields!", Alert.AlertType.WARNING);
-            return null;
+            return false;
         }
 
         double amount;
@@ -224,7 +236,7 @@ public class PaymentManagementController implements Initializable {
             amount = Double.parseDouble(amountText);
         } catch (NumberFormatException e) {
             showAlert("Error", "Invalid amount entered!", Alert.AlertType.ERROR);
-            return null;
+            return false;
         }
 
         // Get the patient ID using the selected name from the map
@@ -235,10 +247,13 @@ public class PaymentManagementController implements Initializable {
 
         if (isPaymentSaved) {
             showAlert("Success", "Payment saved successfully!", Alert.AlertType.INFORMATION);
-            return paymentDTO;
+            if (parentController != null) {
+                parentController.onPaymentCompleted();
+            }
+            return true;
         } else {
             showAlert("Error", "Failed to save payment!", Alert.AlertType.ERROR);
-            return null;
+            return false;
         }
     }
 

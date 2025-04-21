@@ -44,7 +44,6 @@
       <TextField fx:id="txtPaymentId" layoutX="25.0" layoutY="144.0" prefWidth="237.0" promptText="Payment ID" />
       <TextField fx:id="txtAmount" layoutX="25.0" layoutY="181.0" prefWidth="237.0" promptText="Amount" />
       <DatePicker fx:id="dpPaymentDate" layoutX="303.0" layoutY="144.0" prefWidth="200.0" />
-      <TextField fx:id="txtStatus" layoutX="303.0" layoutY="181.0" prefWidth="200.0" promptText="Status (e.g., Paid, Pending)" />
       <ComboBox fx:id="cmbPatient" layoutX="24.0" layoutY="270.0" prefWidth="237.0" promptText="Select Patient" />
       <JFXButton fx:id="btnSave" layoutX="551.0" layoutY="144.0" onAction="#btnSave_OnAction" prefWidth="100.0" style="-fx-background-color: #28a745; -fx-text-fill: white;" text="Save" />
       <JFXButton fx:id="btnUpdate" layoutX="679.0" layoutY="144.0" onAction="#btnUpdate_OnAction" prefWidth="100.0" style="-fx-background-color: #ffc107; -fx-text-fill: black;" text="Update" />
@@ -64,5 +63,6 @@
       <Label layoutX="25.0" layoutY="230.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Patient and Session Info" />
       <TextField fx:id="txtSessionId" layoutX="24.0" layoutY="310.0" prefWidth="237.0" promptText="Session ID" />
       <JFXButton fx:id="btnGetInvoice" layoutX="332.0" layoutY="283.0" onAction="#btnGetInvoice_OnAction" prefWidth="120.0" style="-fx-background-color: #6c63ff; -fx-text-fill: white;" text="Get Invoice" />
+      <ComboBox fx:id="cmbFilterStatus" layoutX="303.0" layoutY="181.0" onAction="#cmbPatientOnAction" prefHeight="26.0" prefWidth="200.0" promptText="Select Payment Status" />
    </children>
 </AnchorPane>

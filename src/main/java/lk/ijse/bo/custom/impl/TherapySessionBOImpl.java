@@ -45,14 +45,19 @@ public class TherapySessionBOImpl implements TherapySessionBO {
         session.setTherapist(therapistDAO.findById(therapistId));
         session.setTherapyProgram(programDAO.findById(programId));
 
-        sessionDAO.save(session);
-        System.out.println("Session booked successfully.");
+        boolean sessionSaved = sessionDAO.save(session);
+        if (!sessionSaved) {
+//            System.out.println("Failed to save therapy session.");
+            return false;
+        }
 
 //         Optional: Set availability manually if you want to reflect it elsewhere
         Therapist therapist = session.getTherapist();
         therapist.setAvailability("BUSY");
-        therapistDAO.update(therapist); // if you have this
-        return false;
+        therapistDAO.update(therapist); // Ensure update() exists in TherapistDAO
+
+//        System.out.println("Session booked successfully.");
+        return true;
     }
 
     public boolean rescheduleSession(String sessionId, LocalDate newDate, LocalTime newTime) {

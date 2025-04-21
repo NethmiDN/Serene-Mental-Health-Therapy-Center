@@ -47,20 +47,22 @@ public class PaymentBOImpl implements PaymentBO {
             List<Payment> paymentList = paymentDAO.getAll();
 
             for (Payment payment : paymentList) {
+                String sessionId = (payment.getSession() != null) ? payment.getSession().getSessionId() : "N/A";
+
                 PaymentDTO dto = new PaymentDTO(
                         payment.getPaymentId(),
                         payment.getAmount(),
                         payment.getPaymentDate(),
                         payment.getStatus(),
                         payment.getPatient().getId(),
-                        payment.getSession().getSessionId()
+                        sessionId
                 );
+
                 paymentDTOList.add(dto);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            // Optionally log or handle error
         }
 
         return paymentDTOList;

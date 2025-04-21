@@ -13,6 +13,7 @@ import java.util.List;
 public class PaymentDAOImpl implements PaymentDAO {
 
     private final FactoryConfiguration factoryConfiguration = new FactoryConfiguration();
+
     @Override
     public boolean save(Payment entity) {
         Session session = factoryConfiguration.getSession();
@@ -73,7 +74,7 @@ public class PaymentDAOImpl implements PaymentDAO {
     public String getNextId() {
         Session session = factoryConfiguration.getSession();
         // Get the last user ID from the database
-        String lastId = session.createQuery("SELECT pa.id FROM Patient pa ORDER BY pa.id DESC", String.class)
+        String lastId = session.createQuery("SELECT pa.id FROM Payment pa ORDER BY pa.id DESC", String.class)
                 .setMaxResults(1)
                 .uniqueResult();
 
