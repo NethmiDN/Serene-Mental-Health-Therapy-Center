@@ -83,8 +83,6 @@ public class LoginPageController implements Initializable {
             loadUI("/view/AdminDashboard.fxml");
         } else if (role == Role.RECEPTIONIST) {
             loadUI("/view/ReceptionistDashboard.fxml");
-        } else if (role == Role.THERAPIST) {
-            loadUI("/view/TherapistManagementForm.fxml");
         } else {
             showAlert("Error", "Unauthorized access!", Alert.AlertType.ERROR);
         }
