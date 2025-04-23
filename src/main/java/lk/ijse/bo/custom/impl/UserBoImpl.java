@@ -28,16 +28,6 @@ public class UserBoImpl implements UserBo {
     }
 
     @Override
-    public ArrayList<String> getAllRoll() {
-        return userDAO.getAllRolls();
-    }
-
-    @Override
-    public User findByRoll(String selectedRoll) throws SQLException, ClassNotFoundException {
-        return userDAO.findByRoll(selectedRoll);
-    }
-
-    @Override
     public boolean isEmailExists(String email){
         return userDAO.isEmailExists(email);
     }

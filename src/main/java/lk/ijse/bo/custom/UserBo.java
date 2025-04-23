@@ -11,10 +11,6 @@ import java.util.List;
 public interface UserBo {
     boolean registerUser(String username,String email, String password, Role role);
 
-    ArrayList<String> getAllRoll();
-
-    User findByRoll(String selectedRoll) throws SQLException, ClassNotFoundException;
-
     boolean isEmailExists(String text);
 
     List<UserDTO> getAllUser();

@@ -1,16 +1,13 @@
 package lk.ijse.dao.custom.impl;
 
-
 import lk.ijse.config.FactoryConfiguration;
+import lk.ijse.controller.LoginPageController;
 import lk.ijse.dao.custom.UserDAO;
 import lk.ijse.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-
 
 public class UserDAOImpl  implements UserDAO {
     private final FactoryConfiguration factoryConfiguration = new FactoryConfiguration();
@@ -45,16 +42,6 @@ public class UserDAOImpl  implements UserDAO {
     }
 
     @Override
-    public ArrayList<String> getAllRolls() {
-        return null;
-    }
-
-    @Override
-    public User findByRoll(String selectedId) throws SQLException, ClassNotFoundException {
-        return null;
-    }
-
-    @Override
     public boolean isEmailExists(String email) {
         return false;
     }
@@ -81,6 +68,7 @@ public class UserDAOImpl  implements UserDAO {
             transaction = session.beginTransaction();
             session.merge(entity); // Use merge to handle detached entities
             transaction.commit();
+            LoginPageController.username = entity.getUsername();
             return true;
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
