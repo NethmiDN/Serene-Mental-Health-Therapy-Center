@@ -86,8 +86,8 @@ public class TherapyProgramManagementFormController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        clmProgramId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        clmProgramName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        clmProgramId.setCellValueFactory(new PropertyValueFactory<>("programId"));
+        clmProgramName.setCellValueFactory(new PropertyValueFactory<>("programName"));
         clmDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
         clmFee.setCellValueFactory(new PropertyValueFactory<>("fee"));
 

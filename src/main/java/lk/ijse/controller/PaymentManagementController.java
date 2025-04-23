@@ -18,9 +18,7 @@ import lk.ijse.bo.custom.impl.PatientBOImpl;
 import lk.ijse.bo.custom.impl.PaymentBOImpl;
 import lk.ijse.bo.custom.impl.TherapyProgramsBOImpl;
 import lk.ijse.dto.PaymentDTO;
-import lk.ijse.dto.TherapySessionDTO;
 import lk.ijse.entity.Patient;
-import lk.ijse.view.tdm.PatientTM;
 import lk.ijse.view.tdm.PaymentTM;
 
 import java.io.IOException;
@@ -130,7 +128,6 @@ public class PaymentManagementController implements Initializable {
         loadPatientCombo();
         loadPayments();
         cmbFilterStatus.setItems(FXCollections.observableArrayList("ALL", "PENDING", "COMPLETED"));
-
     }
 
     private void generateNewPaymentID() {
@@ -165,7 +162,6 @@ public class PaymentManagementController implements Initializable {
             e.printStackTrace();
         }
     }
-
 
     @FXML
     void tblPaymentOnClicked(MouseEvent event) {
@@ -215,11 +211,6 @@ public class PaymentManagementController implements Initializable {
     }
 
     @FXML
-    void btnDelete_OnAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void btnGetInvoice_OnAction(ActionEvent event) {
 
     }
@@ -243,11 +234,6 @@ public class PaymentManagementController implements Initializable {
             showAlert("Error", "Failed to save payment!", Alert.AlertType.ERROR);
         }
         clearFields();
-    }
-
-    @FXML
-    void btnUpdate_OnAction(ActionEvent event) {
-
     }
 
     @FXML
