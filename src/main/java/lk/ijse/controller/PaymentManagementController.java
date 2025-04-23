@@ -206,14 +206,15 @@ public class PaymentManagementController implements Initializable {
     }
 
     @FXML
-    void btnClear_OnAction(ActionEvent event) {
-
+    void btnClear_OnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        clearFields();
     }
 
     @FXML
     void btnGetInvoice_OnAction(ActionEvent event) {
 
     }
+
     private void clearFields() throws SQLException, ClassNotFoundException {
         txtPaymentId.clear();
         txtAmount.clear();
