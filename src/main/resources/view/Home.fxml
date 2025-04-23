@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -35,14 +33,6 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <BarChart fx:id="paymentBarChart" layoutX="405.0" layoutY="278.0" prefHeight="300" prefWidth="400">
-         <xAxis>
-            <CategoryAxis label="Payment Status" />
-         </xAxis>
-         <yAxis>
-            <NumberAxis label="Count" />
-         </yAxis>
-      </BarChart>
       <Button fx:id="logoutbtn" layoutX="647.0" layoutY="597.0" mnemonicParsing="false" onAction="#logoutbtnOnAction" prefHeight="40.0" prefWidth="158.0" style="-fx-background-color: #577BC1;" text="Log Out" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold Italic" size="16.0" />
@@ -53,9 +43,15 @@
             <Image url="@../images/logout.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="434.0" fitWidth="486.0" layoutX="61.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="372.0" fitWidth="428.0" layoutX="90.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/download.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="btnhistory" layoutX="651.0" layoutY="282.0" onAction="#btnHistoryOnAction" prefHeight="35.0" prefWidth="150.0" style="-fx-cursor: hand; -fx-background-color: #80C4E9;" text="Therapy History" />
+      <ImageView fitHeight="326.0" fitWidth="331.0" layoutX="368.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/brain.png" />
          </image>
       </ImageView>
    </children>

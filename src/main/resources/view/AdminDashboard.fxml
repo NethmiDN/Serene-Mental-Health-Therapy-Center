@@ -30,16 +30,26 @@
                   <VBox alignment="CENTER">
                      <children>
                         <Label fx:id="lblWelcome" style="-fx-text-fill: white; -fx-font-size: 16px;" text="Welcome, Admin" />
-                        <HBox alignment="CENTER">
-                           <children>
-                              <Label fx:id="lblAdd" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 0 0 0 10;" />
-                           </children>
-                        </HBox>
                      </children>
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                   </VBox>
+                  <Button fx:id="btnreport" mnemonicParsing="false" onAction="#btnreportOnAction" prefHeight="45.0" prefWidth="246.0" style="-fx-background-color: #80C4E9; -fx-background-radius: 20;" text="View Report">
+                     <font>
+                        <Font name="Comic Sans MS" size="17.0" />
+                     </font>
+                     <effect>
+                        <DropShadow height="18.66" radius="8.245000000000001" width="16.32">
+                           <color>
+                              <Color red="0.9578947424888611" green="0.9366081953048706" blue="0.9366081953048706" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <VBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                     </VBox.margin>
+                  </Button>
                   <Button fx:id="btnDashboard" mnemonicParsing="false" onAction="#btnDashboardOnAction" prefHeight="45.0" prefWidth="246.0" style="-fx-background-color: #344CB7; -fx-background-radius: 20;" text="Dashboard" textFill="WHITE">
                      <font>
                         <Font name="Comic Sans MS" size="17.0" />

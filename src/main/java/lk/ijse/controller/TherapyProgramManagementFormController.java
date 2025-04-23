@@ -92,7 +92,11 @@ public class TherapyProgramManagementFormController implements Initializable {
         clmFee.setCellValueFactory(new PropertyValueFactory<>("fee"));
 
         loadTherapyPrograms();
-        generateNewID();
+        try {
+            generateNewID();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void generateNewID() {
@@ -178,6 +182,9 @@ public class TherapyProgramManagementFormController implements Initializable {
             boolean isSaved = therapyProgramsBO.saveTherapyPrograms(therapyProgramDTO);
 
             if (isSaved) {
+                clearFields();
+                loadTherapyPrograms();
+                generateNewID();
                 showAlert("Success", "Therapy Program save successfully!", Alert.AlertType.INFORMATION);
 
             } else {
@@ -222,6 +229,8 @@ public class TherapyProgramManagementFormController implements Initializable {
         txtProgramName.clear();
         txtProgramDuration.clear();
         txtFee.clear();
+        loadTherapyPrograms();
+        generateNewID();
     }
 
     @FXML

@@ -36,16 +36,10 @@ public class PaymentManagementController implements Initializable {
     private JFXButton btnClear;
 
     @FXML
-    private JFXButton btnDelete;
-
-    @FXML
     private JFXButton btnGetInvoice;
 
     @FXML
     private JFXButton btnSave;
-
-    @FXML
-    private JFXButton btnUpdate;
 
     @FXML
     private ComboBox<String> cmbPatient;
@@ -133,8 +127,6 @@ public class PaymentManagementController implements Initializable {
     private void generateNewPaymentID() {
         txtPaymentId.setText(paymentBO.getNextPaymentID());
         btnSave.setDisable(false);
-        btnUpdate.setDisable(true);
-        btnDelete.setDisable(true);
         btnClear.setDisable(true);
     }
 
@@ -175,8 +167,6 @@ public class PaymentManagementController implements Initializable {
             txtSessionId.setText(selectedItem.getSessionId());
 
             btnSave.setDisable(true);
-            btnUpdate.setDisable(false);
-            btnDelete.setDisable(false);
             btnClear.setDisable(false);
         }
     }
@@ -212,7 +202,30 @@ public class PaymentManagementController implements Initializable {
 
     @FXML
     void btnGetInvoice_OnAction(ActionEvent event) {
+        PaymentTM selectedPayment = tblPayment.getSelectionModel().getSelectedItem();
 
+        if (selectedPayment == null) {
+            showAlert("Warning", "Please select a payment to generate the invoice!", Alert.AlertType.WARNING);
+            return;
+        }
+
+        // Generate the invoice content
+        StringBuilder invoice = new StringBuilder();
+        invoice.append("********** Invoice **********\n");
+        invoice.append("Payment ID: ").append(selectedPayment.getPaymentId()).append("\n");
+        invoice.append("Patient ID: ").append(selectedPayment.getPatientId()).append("\n");
+        invoice.append("Session ID: ").append(selectedPayment.getSessionId()).append("\n");
+        invoice.append("Amount: Rs.").append(String.format("%.2f", selectedPayment.getAmount())).append("\n");
+        invoice.append("Payment Date: ").append(selectedPayment.getPaymentDate()).append("\n");
+        invoice.append("Status: ").append(selectedPayment.getStatus()).append("\n");
+        invoice.append("*****************************\n");
+
+        // Display the invoice in an alert or save it to a file
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Invoice");
+        alert.setHeaderText("Payment Invoice");
+        alert.setContentText(invoice.toString());
+        alert.showAndWait();
     }
 
     private void clearFields() throws SQLException, ClassNotFoundException {
@@ -223,18 +236,18 @@ public class PaymentManagementController implements Initializable {
         cmbPatient.getSelectionModel().clearSelection();
         txtSessionId.clear();
 
+        loadPayments();
         generateNewPaymentID();
     }
 
     @FXML
-    void btnSave_OnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+    void btnSave_OnAction(ActionEvent event) {
         boolean isSave =  savePaymentWithSession();
         if (isSave) {
             showAlert("Success", "Payment Saved!", Alert.AlertType.INFORMATION);
         }else{
             showAlert("Error", "Failed to save payment!", Alert.AlertType.ERROR);
         }
-        clearFields();
     }
 
     @FXML

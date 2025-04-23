@@ -30,6 +30,9 @@ public class AdminPageController implements Initializable {
     private Button btnPatient;
 
     @FXML
+    private Button btnreport;
+
+    @FXML
     private Button btnPayment;
 
     @FXML
@@ -129,6 +132,11 @@ public class AdminPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         navigateTo("/view/Home.fxml");
+    }
+
+    @FXML
+    void btnreportOnAction(ActionEvent event) {
+        loadUI("/view/TherapistPerformanceReport.fxml");
     }
 
     private void navigateTo(String fxmlPath) {
