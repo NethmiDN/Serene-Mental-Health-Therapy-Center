@@ -19,5 +19,7 @@ public interface UserBo {
 
     List<UserDTO> getAllUser();
 
-    void updateUser(UserDTO user);
+    boolean updateUser(UserDTO user);
+
+    User getUserByUsername(String username);
 }

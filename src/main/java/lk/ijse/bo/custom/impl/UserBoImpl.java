@@ -48,8 +48,22 @@ public class UserBoImpl implements UserBo {
     }
 
     @Override
-    public void updateUser(UserDTO user) {
+    public boolean updateUser(UserDTO userDTO) {
+        // Map UserDTO to User entity
+        User user = new User();
+        user.setId(userDTO.getId());
+        user.setUsername(userDTO.getUsername());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
+        user.setRole(Role.valueOf(userDTO.getRole())); // Assuming role is stored as a string in UserDTO
 
+        // Call the DAO update method
+        return userDAO.update(user);
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return userDAO.getUserByUsername(username);
     }
 
 }

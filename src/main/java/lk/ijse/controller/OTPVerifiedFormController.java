@@ -126,7 +126,6 @@ public class OTPVerifiedFormController {
             if (user.getEmail().equals(ForgetPasswordFormController.emailAddress)) {
                 user.setPassword(txtPassword.getText());
                 userBo.updateUser(user);
-                System.out.println("User updated");
                 return true;
             }
         }

@@ -76,7 +76,17 @@ public class UserDAOImpl  implements UserDAO {
 
     @Override
     public boolean update(User entity) {
-        return false;
+        Transaction transaction = null;
+        try (Session session = factoryConfiguration.getSession()) {
+            transaction = session.beginTransaction();
+            session.merge(entity); // Use merge to handle detached entities
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
