@@ -89,10 +89,12 @@ public class TherapistManagementFormController implements Initializable {
 
     private void generateNewId() {
         txtTherapistId.setText(therapistBO.getNextTherapistID());
+        btnSave.setDisable(false);
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
     }
 
     private void loadTherapists() {
-//        therapistList.clear();
         try  {
             ArrayList<TherapistDTO> therapists = therapistBO.loadAllTherapists();
             ObservableList<TherapistTM> therapistTMList = FXCollections.observableArrayList();
@@ -113,13 +115,12 @@ public class TherapistManagementFormController implements Initializable {
             showAlert("Error", "Failed to load therapists!", Alert.AlertType.ERROR);
             e.printStackTrace();
         }
-
-        //table ek reload wenn hdnn
     }
 
     @FXML
     void btnAddNew_OnAction(ActionEvent event) {
         clearFields();
+        generateNewId();
     }
 
     @FXML

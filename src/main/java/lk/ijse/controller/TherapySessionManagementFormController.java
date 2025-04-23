@@ -339,7 +339,7 @@ public class TherapySessionManagementFormController implements Initializable {
 
     @FXML
     void navigateToHome(MouseEvent event) {
-
+        loadUI("/../view/Home.fxml");
     }
 
     private void loadUI(String resource) {

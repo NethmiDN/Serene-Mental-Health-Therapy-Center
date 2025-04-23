@@ -72,6 +72,7 @@ public class TherapyProgramManagementFormController implements Initializable {
     private TextField txtProgramName;
 
     private final TherapyProgramsBO therapyProgramsBO = new TherapyProgramsBOImpl();
+
     private static TherapyProgramManagementFormController instance;
 
     // set therapist id to text field
@@ -96,6 +97,9 @@ public class TherapyProgramManagementFormController implements Initializable {
 
     private void generateNewID() {
         txtProgramId.setText(therapyProgramsBO.getNextTherapyProgramId());
+        btnSave.setDisable(false);
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
     }
 
     private void loadTherapyPrograms() {
@@ -123,7 +127,8 @@ public class TherapyProgramManagementFormController implements Initializable {
 
     @FXML
     void btnAddNew_OnAction(ActionEvent event) {
-
+        clearFields();
+        generateNewID();
     }
 
     @FXML
