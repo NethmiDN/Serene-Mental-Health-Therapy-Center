@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #CBDCEB;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AdminPageController">
+<AnchorPane fx:id="rootPane" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #CBDCEB;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.ReceptionistPageController">
    <children>
       <VBox layoutX="51.0" layoutY="35.0" prefHeight="700.0" prefWidth="250.0" style="-fx-background-radius: 30;">
          <children>
@@ -29,7 +29,7 @@
                   </AnchorPane>
                   <VBox alignment="CENTER">
                      <children>
-                        <Label fx:id="lblWelcome" style="-fx-text-fill: white; -fx-font-size: 16px;" text="Welcome, Admin" />
+                        <Label fx:id="lblWelcome" style="-fx-text-fill: white; -fx-font-size: 16px;" text="Welcome, Receptionist" />
                         <HBox alignment="CENTER">
                            <children>
                               <Label fx:id="lblAdd" style="-fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 0 0 0 10;" />
@@ -70,21 +70,6 @@
                         </DropShadow>
                      </effect>
                   </Button>
-                  <Button fx:id="btnTherapist" mnemonicParsing="false" onAction="#btnTherapistOnAction" prefHeight="45.0" prefWidth="246.0" style="-fx-background-color: #344CB7; -fx-background-radius: 20;" text="Therapist" textFill="WHITE">
-                     <font>
-                        <Font name="Comic Sans MS" size="17.0" />
-                     </font>
-                     <effect>
-                        <DropShadow height="18.66" radius="8.245000000000001" width="16.32">
-                           <color>
-                              <Color red="0.9368420839309692" green="0.9194931983947754" blue="0.9194931983947754" />
-                           </color>
-                        </DropShadow>
-                     </effect>
-                     <VBox.margin>
-                        <Insets left="30.0" right="30.0" top="20.0" />
-                     </VBox.margin>
-                  </Button>
                   <Button fx:id="btnAppointment" mnemonicParsing="false" onAction="#btnAppointmentOnAction" prefHeight="45.0" prefWidth="246.0" style="-fx-background-color: #344CB7; -fx-background-radius: 20;" text="Appointment" textFill="WHITE">
                      <font>
                         <Font name="Comic Sans MS" size="17.0" />
@@ -115,22 +100,7 @@
                         <Insets left="30.0" right="30.0" top="20.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="btnTherapyProgram" mnemonicParsing="false" onAction="#btnTherapyProgramOnAction" prefHeight="45.0" prefWidth="246.0" style="-fx-background-color: #344CB7; -fx-background-radius: 20;" text="Therapy Program" textFill="WHITE">
-                     <font>
-                        <Font name="Comic Sans MS" size="17.0" />
-                     </font>
-                     <effect>
-                        <DropShadow height="18.66" radius="8.245000000000001" width="16.32">
-                           <color>
-                              <Color red="0.9263157844543457" green="0.9057310223579407" blue="0.9057310223579407" />
-                           </color>
-                        </DropShadow>
-                     </effect>
-                     <VBox.margin>
-                        <Insets left="30.0" right="30.0" top="20.0" />
-                     </VBox.margin>
-                  </Button>
-                  <HBox alignment="CENTER" prefHeight="36.0" prefWidth="156.0">
+                  <HBox alignment="CENTER" prefHeight="175.0" prefWidth="261.0">
                      <children>
                         <ImageView fx:id="imgLogout" fitHeight="30" fitWidth="30" onMouseClicked="#onLogoutClick" preserveRatio="true">
                            <image>
@@ -149,6 +119,9 @@
                      <VBox.margin>
                         <Insets top="120.0" />
                      </VBox.margin>
+                     <padding>
+                        <Insets top="100.0" />
+                     </padding>
                   </HBox>
                </children>
             </VBox>

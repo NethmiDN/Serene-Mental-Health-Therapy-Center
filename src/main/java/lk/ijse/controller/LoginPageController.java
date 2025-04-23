@@ -67,7 +67,6 @@ public class LoginPageController {
     @FXML
     void lblCreateAccOnClick(MouseEvent event) {
         loadUI("/view/SignUpPage.fxml");
-
     }
 
     private void navigateToDashBoard(Role role) {
