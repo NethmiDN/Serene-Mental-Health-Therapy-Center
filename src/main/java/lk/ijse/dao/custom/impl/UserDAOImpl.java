@@ -43,7 +43,15 @@ public class UserDAOImpl  implements UserDAO {
 
     @Override
     public boolean isEmailExists(String email) {
-        return false;
+        try (Session session = factoryConfiguration.getSession()) {
+            Long count = session.createQuery("SELECT COUNT(u) FROM User u WHERE u.email = :email", Long.class)
+                    .setParameter("email", email)
+                    .uniqueResult();
+            return count != null && count > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
